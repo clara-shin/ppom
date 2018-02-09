@@ -18,6 +18,10 @@ export default class LoginScreen extends Component {
     onGoogleLogin: () => {},
   }
 
+  handleGoogleButtonClick = () => {
+    this.props.onGoogleLogin();
+  }
+
   render() {
     return (
       <FullHeightGrid centered verticalAlign="middle">
@@ -25,7 +29,7 @@ export default class LoginScreen extends Component {
           <Segment textAlign="center" vertical>
             <Header as="h1" textAlign="center">PPOM</Header>
             <p>시간과 함께 일하는 습관</p>
-            <Button color='google plus'>
+            <Button color='google plus' onClick={this.handleGoogleButtonClick}>
               <Icon name='google plus' />Google 로그인
             </Button>
           </Segment>
