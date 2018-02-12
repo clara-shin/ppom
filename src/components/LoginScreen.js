@@ -8,14 +8,18 @@ import {
 } from 'semantic-ui-react';
 import styled from 'styled-components';
 
-const FullHeightGrid = styled(Grid)`
+const FullHeightGrid = styled(Grid) `
   height: 620px;
   /* background-color: #f03e3e; */
 `;
 
 export default class LoginScreen extends Component {
-  static defaultProps ={
-    onGoogleLogin: () => {},
+  static defaultProps = {
+    onGoogleLogin: () => { },
+  }
+
+  handleGoogleButtonClick = () => {
+    this.props.onGoogleLogin();
   }
 
   handleGoogleButtonClick = () => {
@@ -25,7 +29,7 @@ export default class LoginScreen extends Component {
   render() {
     return (
       <FullHeightGrid centered verticalAlign="middle">
-        <Grid.Column style={{ width: '320px'}}>
+        <Grid.Column style={{ width: '320px' }}>
           <Segment textAlign="center" vertical>
             <Header as="h1" textAlign="center">PPOM</Header>
             <p>시간과 함께 일하는 습관</p>
