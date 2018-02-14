@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import LoginScreenContainer from './containers/LoginScreenContainer';
-import GoalList from './components/GoalList';
+import MainScreen from './components/MainScreen';
 import withAuth from './hocs/withAuth';
 import rootReducer from './ducks';
 
@@ -19,7 +19,7 @@ class App extends Component {
           <div>
             <Route path="/" exact component={Home} />
             <Route path="/login" component={LoginScreenContainer} />
-            <Route path="/list" component={GoalList} />
+            <Route path="/list" component={MainScreen} />
           </div>
         </BrowserRouter>
       </Provider>
