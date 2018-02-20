@@ -1,80 +1,20 @@
-@import url("./fonts.css");
-
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
-html {
-  font-size: 62.5%;
-}
 body {
-  font-family: 'Spoqa Han Sans Regular', sans-serif;
-  font-weight: 400;
-  line-height: 1;
-  box-sizing: border-box;
-}
-ul {
-  list-style-type: none;
-}
-a:link, a:visited {
-  color:#181818;
-}
-a:hover, a:focus, a:active{
-  color:#181818;
-}
-
-i.icon{
-  font-family: fontello;
-  display: initial;
   margin: 0;
-}
-
-.ui.btn.btn-navi{
   padding: 0;
-  width: 50px;
-  border-radius: 50%;
-  height: 50px;
-  background-color: #f03e3e;
-  color: #fff;
-  box-shadow: 1px 2px 3px #848484 !important;
-  font-size: 1.5em;
+  font-family: sans-serif;
+}
+
+/* 새로운목표 페이지*/
+input {
+  display:inline-block;
+}
+.ui.form .inline.field > label{
+  display:inline-block;
+  width: 30%;
+}
+.ui.input{
+  width: 80px !important;
+}
+.ui.input input{
   text-align: center;
-  margin:10px 0 0;
-  left:0;
-}
-.btn.btn-navi:hover, .btn.btn-navi:focus {
-  color:#fff;
-}
-.ui.dimmer{
-  z-index:initial !important;
-}
-
-
-
-@keyframes spreadUp {
-  0% {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-}
-
-.gnb{
-  visibility: hidden;
-}
-.gnbshow{
-  visibility: visible;
-}
-.show{
-  animation: spreadUp .3s  ease-in-out;
-}
-.hide{
-  opacity: 0;
 }

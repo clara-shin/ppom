@@ -7,6 +7,7 @@ import LoginScreenContainer from './containers/LoginScreenContainer';
 import MainScreen from './components/MainScreen';
 import withAuth from './hocs/withAuth';
 import rootReducer from './ducks';
+import PpomScreen from './components/PpomScreen';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 const Home = withAuth(() => <Redirect to="/list" />);
