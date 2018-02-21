@@ -33,7 +33,7 @@ const GnbList = styled.li`
   text-align: right;
   margin-bottom: 10px;
   color:#fff;
-`
+`;
 const NavLink = Link.extend`
   display: inline-block;
   margin: 0 0 0 20px;
@@ -54,21 +54,21 @@ export default class FloatingNav extends Component {
     active: false,
   }
 
-  handleNavToggle = prevState => {
-    if (this.state.active){
+  handleNavToggle = () => {
+    if (this.state.active) {
       this.setState({
         active: false,
-      })
-    }else{
+      });
+    } else {
       this.setState({
         active: true,
-      })
+      });
     }
   }
 
-  //뽀모수정 버튼 클릭 시 이벤트처리
-  handleClickEdit = prevState => {
-    if(this.state.active){
+  // 뽀모수정 버튼 클릭 시 이벤트처리
+  handleClickEdit = () => {
+    if (this.state.active) {
       this.props.onClickEdit();
     }
   }
@@ -79,34 +79,34 @@ export default class FloatingNav extends Component {
       <Navigation>
         <Button
           className="btn btn-navi"
-          icon={{ className: 'icon icon-ellipsis-vert ' + (active ? "icon-cancel-1" : "") }}
-          onClick={ this.handleNavToggle }
+          icon={{ className: `icon icon-ellipsis-vert ${active ? 'icon-cancel-1' : ''}` }}
+          onClick={this.handleNavToggle}
         />
 
-        <Gnb className={"gnb " + ( active ? 'gnbshow' : '' )}>
+        <Gnb className={`gnb ${active ? 'gnbshow' : ''}`}>
           <GnbList>
             <span>가이드북</span>
-            <NavLink className={ active ? 'show' : 'hide' }>
-              <Icon className='icon icon-book' />
+            <NavLink className={active ? 'show' : 'hide'}>
+              <Icon className="icon icon-book" />
             </NavLink>
           </GnbList>
           <GnbList>
             <span>로그아웃</span>
-            <NavLink className={ active ? 'show' : 'hide'}>
-              <Icon className='icon icon-logout' />
+            <NavLink className={active ? 'show' : 'hide'}>
+              <Icon className="icon icon-logout" />
             </NavLink>
           </GnbList>
           <GnbList>
             <span>뽀모편집</span>
-            <NavLink className={ active ? 'show' : 'hide'} onClickEdit={this.handleClickEdit}>
-              <Icon className='icon icon-pencil' />
+            <NavLink className={active ? 'show' : 'hide'} onClickEdit={this.handleClickEdit}>
+              <Icon className="icon icon-pencil" />
             </NavLink>
           </GnbList>
         </Gnb>
 
-        <Dimmer active={ active } page></Dimmer>
+        <Dimmer active={active} page />
       </Navigation>
 
-    )
+    );
   }
 }

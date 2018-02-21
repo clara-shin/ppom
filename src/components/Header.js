@@ -16,7 +16,7 @@ export const Button = styled.button`
   margin:0;
   padding:0;
   cursor:pointer;
-`
+`;
 export const Link = Button.withComponent('a');
 
 const HeaderLink = Link.extend`
@@ -46,6 +46,6 @@ export default class Header extends Component {
         <Title>목표</Title>
         <HeaderLink>기록</HeaderLink>
       </Wrap>
-    )
+    );
   }
 }
