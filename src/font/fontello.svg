@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2018 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="pencil" unicode="&#xe800;" d="M718 680q32-32 47-64t15-48l0-16-252-252-290-288-238-52 50 240 290 288 252 252q54 12 126-60z m-494-640l24 24q-2 44-52 94-22 22-45 35t-35 13l-14 2-22-24-18-80q28-16 46-34 24-24 36-48z" horiz-adv-x="780" />
+
+<glyph glyph-name="pencil-1" unicode="&#xe801;" d="M203-7l50 51-131 131-51-51v-60h72v-71h60z m291 518q0 12-12 12-5 0-9-4l-303-302q-4-4-4-10 0-12 13-12 5 0 9 4l303 302q3 4 3 10z m-30 107l232-232-464-465h-232v233z m381-54q0-29-20-50l-93-93-232 233 93 92q20 21 50 21 29 0 51-21l131-131q20-22 20-51z" horiz-adv-x="857.1" />
+
+<glyph glyph-name="logout" unicode="&#xe802;" d="M912 614l276-266-276-264v177h-413v176h413v177z m-166-512l106-107q-156-146-338-146-217 0-365 143t-149 359q0 135 68 250t184 182 250 66q184 0 349-148l-105-106q-114 104-243 104-149 0-251-104t-103-254q0-140 106-241t247-101q131 0 244 103z" horiz-adv-x="1188" />
+
+<glyph glyph-name="book" unicode="&#xe803;" d="M130 797l669 0 0-894-669 0q-46 0-79 33t-33 80l0 669q0 46 33 79t79 33z m558-781l0 669-112 0 0-224-112 112-111-112 0 224-112 0 0-669 447 0z" horiz-adv-x="817" />
+
+<glyph glyph-name="right-open-big" unicode="&#xe804;" d="M13-20l358 370-358 372q-26 26 0 48 26 26 48 0l392-394q24-26 0-50l-392-394q-22-26-48 0-26 22 0 48z" horiz-adv-x="465" />
+
+<glyph glyph-name="cancel-1" unicode="&#xe805;" d="M724 112q0-22-15-38l-76-76q-16-15-38-15t-38 15l-164 165-164-165q-16-15-38-15t-38 15l-76 76q-16 16-16 38t16 38l164 164-164 164q-16 16-16 38t16 38l76 76q16 16 38 16t38-16l164-164 164 164q16 16 38 16t38-16l76-76q15-15 15-38t-15-38l-164-164 164-164q15-15 15-38z" horiz-adv-x="785.7" />
+
+<glyph glyph-name="ellipsis-vert" unicode="&#xf142;" d="M214 154v-108q0-22-15-37t-38-16h-107q-23 0-38 16t-16 37v108q0 22 16 38t38 15h107q22 0 38-15t15-38z m0 285v-107q0-22-15-38t-38-15h-107q-23 0-38 15t-16 38v107q0 23 16 38t38 16h107q22 0 38-16t15-38z m0 286v-107q0-22-15-38t-38-16h-107q-23 0-38 16t-16 38v107q0 22 16 38t38 16h107q22 0 38-16t15-38z" horiz-adv-x="214.3" />
+</font>
+</defs>
+</svg>
