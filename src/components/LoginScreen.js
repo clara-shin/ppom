@@ -16,6 +16,11 @@ const FullHeightGrid = styled(Grid)`
 export default class LoginScreen extends Component {
   static defaultProps = {
     onGoogleLogin: () => { },
+    onLoginComplete: () => { },
+  }
+
+  componentWillMount() {
+    this.props.onLoginComplete();
   }
 
   handleGoogleButtonClick = () => {

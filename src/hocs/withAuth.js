@@ -48,5 +48,5 @@ export default function withAuth(WrappedComponent) {
         <WrappedComponent {...this.props} />
       );
     }
-  }
+  };
 }

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { Redirect } from 'react-router-dom';
+import React, { Component } from 'react';
 import LoginScreen from '../components/LoginScreen';
 
 export default class LoginScreenContainer extends Component {
@@ -8,12 +8,20 @@ export default class LoginScreenContainer extends Component {
     redirectToList: false,
   }
 
+  completeGoogleLogin = async () => {
+    // 로딩인디케이터
+    const redirectResult = await firebase.auth().getRedirectResult();
+    // 해제
+    if (redirectResult.credential) {
+      this.setState({
+        redirectToList: true,
+      });
+    }
+  }
+
   handleGoogleLogin = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     await firebase.auth().signInWithRedirect(provider);
-    this.setState({
-      redirectToList: true,
-    });
   }
 
   render() {
@@ -23,7 +31,10 @@ export default class LoginScreenContainer extends Component {
       );
     }
     return (
-      <LoginScreen onGoogleLogin={this.handleGoogleLogin} />
+      <LoginScreen
+        onGoogleLogin={this.handleGoogleLogin}
+        onLoginComplete={this.completeGoogleLogin}
+      />
     );
   }
 }
