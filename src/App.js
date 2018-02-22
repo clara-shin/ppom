@@ -7,6 +7,7 @@ import LoginScreenContainer from './containers/LoginScreenContainer';
 import withAuth from './hocs/withAuth';
 import rootReducer from './ducks';
 import ListPage from './containers/ListPage';
+import GoalMakeFormContainer from './containers/GoalMakeFormContainer';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 const Home = withAuth(() => <Redirect to="/list" />);
@@ -20,6 +21,7 @@ class App extends Component {
             <Route path="/" exact component={Home} />
             <Route path="/login" component={LoginScreenContainer} />
             <Route path="/list" component={ListPage} />
+            <Route path="/make-goal" component={GoalMakeFormContainer} />
           </div>
         </BrowserRouter>
       </Provider>

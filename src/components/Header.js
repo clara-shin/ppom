@@ -42,7 +42,7 @@ export default class Header extends Component {
   render() {
     return (
       <Wrap>
-        <HeaderLink>추가</HeaderLink>
+        <HeaderLink href="/make-goal">추가</HeaderLink>
         <Title>목표</Title>
         <HeaderLink>기록</HeaderLink>
       </Wrap>
