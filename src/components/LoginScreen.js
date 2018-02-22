@@ -22,10 +22,6 @@ export default class LoginScreen extends Component {
     this.props.onGoogleLogin();
   }
 
-  handleGoogleButtonClick = () => {
-    this.props.onGoogleLogin();
-  }
-
   render() {
     return (
       <FullHeightGrid centered verticalAlign="middle">
