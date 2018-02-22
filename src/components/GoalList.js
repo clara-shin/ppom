@@ -44,7 +44,6 @@ const PpomCount = styled.div`
 `;
 const PpomNum = styled.strong`
   font-size: 2.4em;
-  line-height: 1.6em;
   text-align: center;
 `;
 const GoalTitle = styled.div`
@@ -53,7 +52,7 @@ const GoalTitle = styled.div`
   display: -webkit-box;
   width: 70%;
   margin: 0 auto;
-  font-size: 2em;
+  font-size: 1.5em;
   line-height: 1.4;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;

@@ -7,8 +7,7 @@ import GoalList from './GoalList';
 import FloatingNav from './FloatingNav';
 
 const Wrapper = styled.div`
-  position:relative;
-  width: 100vw;
+  position: relative;
   height: 100vh;
 `;
 
@@ -20,6 +19,6 @@ export default class MainScreen extends Component {
         <GoalList />
         <FloatingNav />
       </Wrapper>
-    )
+    );
   }
 }

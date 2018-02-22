@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 // import { Menu } from 'semantic-ui-react'
 import styled from 'styled-components';
 
-const Wrap = styled.header`
+export const Wrap = styled.header`
   display:flex;
+  min-height:56px;
   justify-content: space-between;
   align-items: center;
   background-color: #f03e3e;
@@ -19,7 +20,7 @@ export const Button = styled.button`
 `;
 export const Link = Button.withComponent('a');
 
-const HeaderLink = Link.extend`
+export const HeaderLink = Link.extend`
   display:block;
   padding:10px;
   font-size: 16px;
@@ -30,7 +31,7 @@ const HeaderLink = Link.extend`
   }
 `;
 
-const Title = styled.h1`
+export const Title = styled.h1`
   margin:0;
   padding:0;
   font-weight:normal;
@@ -42,9 +43,15 @@ export default class Header extends Component {
   render() {
     return (
       <Wrap>
-        <HeaderLink>추가</HeaderLink>
-        <Title>목표</Title>
-        <HeaderLink>기록</HeaderLink>
+        <HeaderLink>
+          추가
+        </HeaderLink>
+        <Title>
+          목표
+        </Title>
+        <HeaderLink>
+          기록
+        </HeaderLink>
       </Wrap>
     );
   }

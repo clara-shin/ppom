@@ -10,6 +10,7 @@ import styled from 'styled-components';
 
 const FullHeightGrid = styled(Grid)`
   height: 620px;
+  margin: 0 !important;
   /* background-color: #f03e3e; */
 `;
 
@@ -30,7 +31,7 @@ export default class LoginScreen extends Component {
             <Header as="h1" textAlign="center">PPOM</Header>
             <p>시간과 함께 일하는 습관</p>
             <Button color="google plus" onClick={this.handleGoogleButtonClick}>
-              <Icon name="google plus" />Google 로그인
+              <Icon className="icon icon-gplus" />Google 로그인
             </Button>
           </Segment>
         </Grid.Column>
