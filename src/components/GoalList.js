@@ -1,10 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-import {
-  Segment,
-} from 'semantic-ui-react';
-
-import withAuth from '../hocs/withAuth';
+import { Segment } from 'semantic-ui-react';
 
 const GoalListWrap = styled.div`
   margin:20px;
@@ -33,6 +29,7 @@ const GoalWrap = styled.a`
   cursor: pointer;
   color:#181818;
 `;
+
 const PpomCount = styled.div`
   width: 30%;
   float: left;
@@ -42,11 +39,13 @@ const PpomCount = styled.div`
   text-align: right;
   letter-spacing:-0.5px;
 `;
+
 const PpomNum = styled.strong`
   font-size: 2.4em;
   line-height: 1.6em;
   text-align: center;
 `;
+
 const GoalTitle = styled.div`
   display: block;
   float:left;
@@ -60,17 +59,28 @@ const GoalTitle = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
-const GoalList = () => (
-  <GoalListWrap>
-    <Segment stacked>
-      <GoalWrap>
-        <GoalTitle>독서하고 독후감 작성하기 독서하고 독후감 작성하기 독서하고 독후감 작성하기 독서하고 독후감 작성하기</GoalTitle>
-        <PpomCount>
-          <PpomNum>77</PpomNum> ppom
-        </PpomCount>
-      </GoalWrap>
-    </Segment>
-  </GoalListWrap>
-);
 
-export default withAuth(GoalList);
+export default class GoalList extends Component {
+  static defaultProps = {
+    goals: [],
+  }
+
+  render() {
+    const { goals } = this.props;
+    return (
+      <GoalListWrap>{
+        goals.map(({ gid, ...goal }) => (
+          <Segment key={gid} stacked>
+            <GoalWrap>
+              <GoalTitle>{goal.goal}</GoalTitle>
+              <PpomCount>
+                <PpomNum>{goal.pomo}</PpomNum> ppom
+              </PpomCount>
+            </GoalWrap>
+          </Segment>
+        ))
+      }
+      </GoalListWrap>
+    );
+  }
+}

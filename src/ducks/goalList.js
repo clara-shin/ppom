@@ -1,3 +1,5 @@
+import * as firebase from 'firebase';
+
 export const LOADING = 'goalList/LOADING';
 export const SUCCESS = 'goalList/SUCCESS';
 
@@ -36,8 +38,53 @@ export default function (state = initialState, action) {
   }
 }
 
+const getTodayDate = () => {
+  const today = new Date(Date.now());
+  return {
+    date: '2018-02-13', // today.toISOString().split('T')[0],
+    startAt: today.setHours(0, 0, 0, 0) - 1,
+    endAt: today.setHours(23, 59, 59, 59) + 1,
+  };
+};
+
+function getPomo(goalsObj, gid) {
+  if (gid in goalsObj) {
+    const dateKey = getTodayDate().date;
+    const pomo = 'pomo';
+    const goalObj = goalsObj[gid];
+    if (dateKey in goalObj) {
+      if ('pomo' in goalObj[dateKey]) {
+        return goalObj[dateKey][pomo];
+      }
+    }
+  }
+  return 0;
+}
+
 export const fetchGoalList = () => async (dispatch) => {
   dispatch(goalListLoading());
   // 목표 목록 로드하는 부분
-  dispatch(goalListSuccess({}));
+  const { currentUser } = firebase.auth();
+  const todayObj = getTodayDate();
+  const numOfLimit = 7;
+  const goalsRef = firebase.database().ref(`goals/${currentUser.uid}`);
+  const goalsSnap = goalsRef.orderByChild('updatedAt').limitToLast(numOfLimit).once('value');
+  const achievesRef = firebase.database().ref(`achieves/${currentUser.uid}`);
+  const achieveSnap = achievesRef.orderByChild(`${todayObj.date}`).once('value');
+  const snapArr = await Promise.all([goalsSnap, achieveSnap]);
+
+  const goalObj = snapArr[0].val();
+  const achieveObj = snapArr[1].val();
+  if (goalObj && achieveObj) {
+    const goals = Object.entries(goalObj).map(([gid, goal]) => (
+      {
+        ...goal,
+        gid,
+        pomo: getPomo(achieveObj, gid),
+      }
+    ));
+    dispatch(goalListSuccess(goals));
+  } else {
+    console.log('데이터 없음');
+  }
 };
