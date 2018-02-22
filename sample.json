@@ -1,0 +1,187 @@
+{
+  "users": {
+    "dY7lr0Mbm2b1nkyRWxEboxwuaGl1": {
+      "name": "이름", 
+      "userEmail": "xxx@gmail.com",
+      "photoURL": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=64"
+    }
+  },
+  "goals": {
+    "dY7lr0Mbm2b1nkyRWxEboxwuaGl1":{
+      "goal0": {
+        "goal": "goal1",
+        "ppomtime": 25,
+        "breaktime": 5,
+        "longbreaktime": 20,
+        "longbreakfrqncy": 4,
+        "createdAt": 1517324400000,
+        "updatedAt": 1518533999058
+      },
+      "goal1": {
+        "goal": "goal2",
+        "ppomtime": 25,
+        "breaktime": 5,
+        "longbreaktime": 20,
+        "longbreakfrqncy": 4,
+        "createdAt": 1517325400000,
+        "updatedAt": 1518447600001
+      },
+      "goal2": {
+        "goal": "goal3",
+        "ppomtime": 25,
+        "breaktime": 5,
+        "longbreaktime": 20,
+        "longbreakfrqncy": 4,
+        "createdAt": 1517326400000,
+        "updatedAt": 1518493806744
+      },
+      "goal3": {
+        "goal": "goal4",
+        "ppomtime": 25,
+        "breaktime": 5,
+        "longbreaktime": 20,
+        "longbreakfrqncy": 4,
+        "createdAt": 1517327400000,
+        "updatedAt": 1518493756910
+      },
+      "goal4": {
+        "goal": "goal5",
+        "ppomtime": 25,
+        "breaktime": 5,
+        "longbreaktime": 20,
+        "longbreakfrqncy": 4,
+        "createdAt": 1517328400000,
+        "updatedAt": 1518493799711
+      },
+      "goal5": {
+        "goal": "goal6",
+        "ppomtime": 25,
+        "breaktime": 5,
+        "longbreaktime": 20,
+        "longbreakfrqncy": 4,
+        "createdAt": 1517329400000,
+        "updatedAt": 1518493766057
+      },
+      "goal6": {
+        "goal": "goal7",
+        "ppomtime": 25,
+        "breaktime": 5,
+        "longbreaktime": 20,
+        "longbreakfrqncy": 4,
+        "createdAt": 1517330400000,
+        "updatedAt": 1518493793388
+      },
+      "goal7": {
+        "goal": "goal8",
+        "ppomtime": 25,
+        "breaktime": 5,
+        "longbreaktime": 20,
+        "longbreakfrqncy": 4,
+        "createdAt": 1517331400000,
+        "updatedAt": 1518493772664
+      },
+      "goal8": {
+        "goal": "goal9",
+        "ppomtime": 25,
+        "breaktime": 5,
+        "longbreaktime": 20,
+        "longbreakfrqncy": 4,
+        "createdAt": 1517332400000,
+        "updatedAt": 1518493785622
+      },
+      "goal9": {
+        "goal": "goal10",
+        "ppomtime": 25,
+        "breaktime": 5,
+        "longbreaktime": 20,
+        "longbreakfrqncy": 4,
+        "createdAt": 1517333400000,
+        "updatedAt": 1518493779267
+      }
+    }
+  },
+  "achieves": {
+    "dY7lr0Mbm2b1nkyRWxEboxwuaGl1":{
+      "goal0": {
+        "2018-02-13":{
+          "goal": "goal title1",
+          "time": 100,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        }
+      },
+      "goal2": {
+        "2018-02-13": {
+          "goal": "goal title3",
+          "time": 100,
+          "pomo": 3,
+          "updatedAt": 1518493806744
+        }
+      },
+      "goal4": {
+        "2018-02-13": {
+          "goal": "goal title5",
+          "time": 100,
+          "pomo": 5,
+          "updatedAt": 1518493799711
+        }
+      },
+      "goal6": {
+        "2018-02-13": {
+          "goal": "goal title7",
+          "time": 100,
+          "pomo": 7,
+          "updatedAt": 1518493793388
+        }
+      },
+      "goal8": {
+        "2018-02-13": {
+          "goal": "goal title9",
+          "time": 100,
+          "pomo": 9,
+          "updatedAt": 1518493785622
+        }
+      },
+      "goal9": {
+        "2018-02-13": {
+          "goal": "goal title10",
+          "time": 100,
+          "pomo": 10,
+          "updatedAt": 1518493779267
+        }
+      },
+      "goal7": {
+        "2018-02-13": {
+          "goal": "goal title8",
+          "time": 100,
+          "pomo": 8,
+          "updatedAt": 1518493772664
+        }
+      },
+      "goal5": {
+        "2018-02-13": {
+          "goal": "goal title6",
+          "time": 100,
+          "pomo": 6,
+          "updatedAt": 1518493766057
+        }
+      },
+      "goal3": {
+        "2018-02-13": {
+          "goal": "goal title4",
+          "time": 100,
+          "pomo": 4,
+          "updatedAt": 1518493756910
+        }
+      },
+      "goal1": {
+        "2018-02-13": {
+          "goal": "goal title2",
+          "time": 100,
+          "pomo": 2,
+          "updatedAt": 1518447600001
+        }
+      }
+    }
+  }
+}
