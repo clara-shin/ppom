@@ -93,13 +93,13 @@ export default class FloatingNav extends Component {
           <GnbList>
             <span>로그아웃</span>
             <NavLink className={active ? 'show' : 'hide'}>
-              <Icon className="icon icon-logout" />
+              <Icon className="icon icon-logout-1" />
             </NavLink>
           </GnbList>
           <GnbList>
-            <span>뽀모편집</span>
+            <span>목표편집</span>
             <NavLink className={active ? 'show' : 'hide'} onClickEdit={this.handleClickEdit}>
-              <Icon className="icon icon-pencil" />
+              <Icon className="icon icon-pencil-1" />
             </NavLink>
           </GnbList>
         </Gnb>
