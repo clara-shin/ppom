@@ -31,6 +31,7 @@ a:hover, a:focus, a:active{
 
 /* fontello 아이콘 설정*/
 i.icon{
+  display:inline-block;
   font-family: fontello;
   display: initial;
   margin: 0;

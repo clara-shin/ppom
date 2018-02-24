@@ -7,7 +7,10 @@ const GoalListWrap = styled.div`
 `;
 
 const GoalWrap = styled.a`
-  display: block;
+  display: flex;
+  justify-content:flex-start;
+  width:100%;
+  height:100%;
   position:relative;
   padding: 20px;
   &:after {
@@ -16,14 +19,12 @@ const GoalWrap = styled.a`
     clear:both;
   }
   &:before {
-    content: '>';
+    font-family:fontello;
     position: absolute;
     top: 50%;
     right: 0;
     transform: translateY(-50%);
     font-size: 2em;
-
-    visibility: hidden;
   }
   box-sizing: border-box;
   cursor: pointer;
@@ -31,9 +32,10 @@ const GoalWrap = styled.a`
 `;
 
 const PpomCount = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   width: 30%;
-  float: left;
-  font-size: 1.4em;
   font-weight:bold;
   vertical-align: baseline;
   text-align: right;
@@ -41,22 +43,23 @@ const PpomCount = styled.div`
 `;
 
 const PpomNum = styled.strong`
-  font-size: 2.4em;
+  font-size: 1.8em;
   text-align: center;
+  padding-right: 5px;
+  color: #f03e3e;
 `;
 
 const GoalTitle = styled.div`
-  display: block;
-  float:left;
-  display: -webkit-box;
   width: 70%;
-  margin: 0 auto;
-  font-size: 1.5em;
-  line-height: 1.4;
+  /* height: 2.8em; */
+  display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.4;
   overflow: hidden;
-  text-overflow: ellipsis;
+  font-size:1.4em;
 `;
 
 export default class GoalList extends Component {
@@ -70,7 +73,7 @@ export default class GoalList extends Component {
       <GoalListWrap>{
         goals.map(({ gid, ...goal }) => (
           <Segment key={gid} stacked>
-            <GoalWrap>
+            <GoalWrap className="icon icon-right-open">{/* 플로팅네비게이션 목표수정 메뉴 클릭 시 icon-right-open 추가 */}
               <GoalTitle>{goal.goal}</GoalTitle>
               <PpomCount>
                 <PpomNum>{goal.pomo}</PpomNum> ppom
