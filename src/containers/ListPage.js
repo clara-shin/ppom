@@ -7,7 +7,6 @@ import FloatingNav from '../components/FloatingNav';
 
 const Wrapper = styled.div`
   position:relative;
-  width: 100vw;
   height: 100vh;
 `;
 

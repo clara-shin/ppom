@@ -76,37 +76,38 @@ export default class FloatingNav extends Component {
     const { active } = this.state;
 
     return (
-      <Navigation>
-        <Button
-          className="btn btn-navi"
-          icon={{ className: `icon icon-ellipsis-vert ${active ? 'icon-cancel-1' : ''}` }}
-          onClick={this.handleNavToggle}
-        />
+      <div>
+        <Navigation>
+          <Button
+            className="btn btn-navi"
+            icon={{ className: `icon icon-ellipsis-vert ${active ? 'icon-cancel-1' : ''}` }}
+            onClick={this.handleNavToggle}
+          />
 
-        <Gnb className={`gnb ${active ? 'gnbshow' : ''}`}>
-          <GnbList>
-            <span>가이드북</span>
-            <NavLink className={active ? 'show' : 'hide'}>
-              <Icon className="icon icon-book" />
-            </NavLink>
-          </GnbList>
-          <GnbList>
-            <span>로그아웃</span>
-            <NavLink className={active ? 'show' : 'hide'}>
-              <Icon className="icon icon-logout-1" />
-            </NavLink>
-          </GnbList>
-          <GnbList>
-            <span>목표편집</span>
-            <NavLink className={active ? 'show' : 'hide'} onClickEdit={this.handleClickEdit}>
-              <Icon className="icon icon-pencil-1" />
-            </NavLink>
-          </GnbList>
-        </Gnb>
+          <Gnb className={`gnb ${active ? 'gnbshow' : ''}`}>
+            <GnbList>
+              <span>가이드북</span>
+              <NavLink className={active ? 'show' : 'hide'}>
+                <Icon className="icon icon-book" />
+              </NavLink>
+            </GnbList>
+            <GnbList>
+              <span>로그아웃</span>
+              <NavLink className={active ? 'show' : 'hide'}>
+                <Icon className="icon icon-logout-1" />
+              </NavLink>
+            </GnbList>
+            <GnbList>
+              <span>목표편집</span>
+              <NavLink className={active ? 'show' : 'hide'} onClickEdit={this.handleClickEdit}>
+                <Icon className="icon icon-pencil-1" />
+              </NavLink>
+            </GnbList>
+          </Gnb>
 
-        <Dimmer active={active} page />
-      </Navigation>
-
+        </Navigation>
+        <Dimmer active={active} />
+      </div>
     );
   }
 }
