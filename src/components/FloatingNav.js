@@ -78,12 +78,13 @@ export default class FloatingNav extends Component {
   render() {
     const { active } = this.state;
     return (
-      <Navigation>
-        <Button
-          className="btn btn-navi"
-          icon={{ className: `icon icon-ellipsis-vert ${active ? 'icon-cancel-1' : ''}` }}
-          onClick={this.handleNavToggle}
-        />
+      <div>
+        <Navigation>
+          <Button
+            className="btn btn-navi"
+            icon={{ className: `icon icon-ellipsis-vert ${active ? 'icon-cancel-1' : ''}` }}
+            onClick={this.handleNavToggle}
+          />
 
         <Gnb className={`gnb ${active ? 'gnbshow' : ''}`}>
           <GnbList>
@@ -109,6 +110,9 @@ export default class FloatingNav extends Component {
         <Dimmer active={active} page />
       </Navigation>
 
+        </Navigation>
+        <Dimmer active={active} />
+      </div>
     );
   }
 }
