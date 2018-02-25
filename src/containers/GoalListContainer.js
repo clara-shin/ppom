@@ -7,6 +7,7 @@ import GoalList from '../components/GoalList';
 class GoalListContainer extends Component {
   static defaultProps = {
     onMount: () => {},
+    isEditList: false,
   }
 
   componentDidMount() {

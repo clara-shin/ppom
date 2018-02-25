@@ -60,23 +60,46 @@ const GoalTitle = styled.div`
   text-overflow: ellipsis;
 `;
 
+const GoalEdit = styled.div`
+  display:block;
+  float:left;
+  font-size: 1.4em;
+  color: red;
+  line-height: 1.4;
+`;
+
 export default class GoalList extends Component {
   static defaultProps = {
     goals: [],
+    isEditList: false,
   }
 
   render() {
-    const { goals } = this.props;
+    const { goals, isEditList } = this.props;
     return (
       <GoalListWrap>{
         goals.map(({ gid, ...goal }) => (
           <Segment key={gid} stacked>
-            <GoalWrap>
-              <GoalTitle>{goal.goal}</GoalTitle>
-              <PpomCount>
-                <PpomNum>{goal.pomo}</PpomNum> ppom
-              </PpomCount>
-            </GoalWrap>
+            {
+              (isEditList)
+              ?
+                <GoalWrap href={`edit-goal/${gid}`}>
+                  <GoalEdit>편집</GoalEdit>
+                  <GoalTitle>
+                    {goal.goal}
+                  </GoalTitle>
+                  <PpomCount>
+                    <PpomNum>{goal.pomo}</PpomNum> ppom
+                  </PpomCount>
+                </GoalWrap>
+              :
+                <GoalWrap>
+                  <GoalTitle>{goal.goal}</GoalTitle>
+                  <PpomCount>
+                    <PpomNum>{goal.pomo}</PpomNum> ppom
+                  </PpomCount>
+                </GoalWrap>
+            }
           </Segment>
         ))
       }

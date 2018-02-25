@@ -5,9 +5,7 @@ import {
   Dimmer,
   Icon,
 } from 'semantic-ui-react';
-
 import { Link } from './Header';
-
 
 const Navigation = styled.nav`
   position: fixed;
@@ -50,6 +48,10 @@ const NavLink = Link.extend`
   box-shadow: 1px 2px 3px #848484;
 `;
 export default class FloatingNav extends Component {
+  static defaultProps = {
+    onClickEdit: () => {},
+  }
+
   state = {
     active: false,
   }
@@ -69,12 +71,12 @@ export default class FloatingNav extends Component {
   // 뽀모수정 버튼 클릭 시 이벤트처리
   handleClickEdit = () => {
     if (this.state.active) {
-      this.props.onClickEdit();
+      this.props.onClickEdit(true);
+      this.handleNavToggle();
     }
   }
   render() {
     const { active } = this.state;
-
     return (
       <Navigation>
         <Button
@@ -98,7 +100,7 @@ export default class FloatingNav extends Component {
           </GnbList>
           <GnbList>
             <span>뽀모편집</span>
-            <NavLink className={active ? 'show' : 'hide'} onClickEdit={this.handleClickEdit}>
+            <NavLink className={active ? 'show' : 'hide'} onClick={this.handleClickEdit}>
               <Icon className="icon icon-pencil" />
             </NavLink>
           </GnbList>
