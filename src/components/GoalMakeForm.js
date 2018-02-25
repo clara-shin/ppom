@@ -23,19 +23,37 @@ const Wrapper = styled.div`
 
 export default class GoalMakeForm extends Component {
   static defaultProps = {
-    errorMsg: '',
-    onSubmit: () => {},
-    onChange: () => {},
     creating: false,
+    errorMsg: '',
+    onChange: () => {},
+    onSubmit: () => {},
+    goalDetail: {},
   }
 
   state = {
+    gid: '',
     goal: '',
     ppomtime: 25,
     breaktime: 5,
     longbreaktime: 20,
     longbreakfrqncy: 4,
     checkingItem: '',
+  }
+
+  componentWillReceiveProps() {
+    if (this.props.goalDetail) {
+      const {
+        gid, goal, ppomtime, breaktime, longbreaktime, longbreakfrqncy,
+      } = this.props.goalDetail;
+      this.setState({
+        gid,
+        goal,
+        ppomtime,
+        breaktime,
+        longbreaktime,
+        longbreakfrqncy,
+      });
+    }
   }
 
   handleChange = (e, { name, value }) => {
@@ -59,10 +77,11 @@ export default class GoalMakeForm extends Component {
   }
 
   render() {
-    const {
-      goal, ppomtime, breaktime, longbreakfrqncy, longbreaktime,
-    } = this.state;
     const { errorMsg, creating } = this.props;
+    const {
+      goal, ppomtime, breaktime, longbreaktime, longbreakfrqncy,
+    } = this.state;
+
     return (
       <Wrapper>
         <Header />
@@ -76,6 +95,7 @@ export default class GoalMakeForm extends Component {
             placeholder="목표가 무엇인가요?"
             rows={2}
             onChange={this.handleChange}
+            value={goal}
             required
           />
           <Form.Field inline required>
@@ -102,7 +122,7 @@ export default class GoalMakeForm extends Component {
           {
             errorMsg && (
               <Message negative>
-                <Message.Header>{ errorMsg }</Message.Header>
+                <Message.Header>{errorMsg}</Message.Header>
               </Message>
             )
           }

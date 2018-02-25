@@ -22,6 +22,7 @@ class App extends Component {
             <Route path="/login" component={LoginScreenContainer} />
             <Route path="/list" component={ListPage} />
             <Route path="/make-goal" component={GoalMakeFormContainer} />
+            <Route path="/edit-goal/:gid" component={GoalMakeFormContainer} />
           </div>
         </BrowserRouter>
       </Provider>
