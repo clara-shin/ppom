@@ -62,23 +62,46 @@ const GoalTitle = styled.div`
   font-size:1.4em;
 `;
 
+const GoalEdit = styled.div`
+  display:block;
+  float:left;
+  font-size: 1.4em;
+  color: red;
+  line-height: 1.4;
+`;
+
 export default class GoalList extends Component {
   static defaultProps = {
     goals: [],
+    isEditList: false,
   }
 
   render() {
-    const { goals } = this.props;
+    const { goals, isEditList } = this.props;
     return (
       <GoalListWrap>{
         goals.map(({ gid, ...goal }) => (
           <Segment key={gid} stacked>
-            <GoalWrap className="icon icon-right-open">{/* 플로팅네비게이션 목표수정 메뉴 클릭 시 icon-right-open 추가 */}
-              <GoalTitle>{goal.goal}</GoalTitle>
-              <PpomCount>
-                <PpomNum>{goal.pomo}</PpomNum> ppom
-              </PpomCount>
-            </GoalWrap>
+            {
+              (isEditList)
+              ?
+                <GoalWrap href={`edit-goal/${gid}`} className="icon icon-right-open">{/* 플로팅네비게이션 목표수정 메뉴 클릭 시 icon-right-open 추가 */}
+                  <GoalEdit>편집</GoalEdit>
+                  <GoalTitle>
+                    {goal.goal}
+                  </GoalTitle>
+                  <PpomCount>
+                    <PpomNum>{goal.pomo}</PpomNum> ppom
+                  </PpomCount>
+                </GoalWrap>
+              :
+                <GoalWrap className="icon icon-right-open">{/* 플로팅네비게이션 목표수정 메뉴 클릭 시 icon-right-open 추가 */}
+                  <GoalTitle>{goal.goal}</GoalTitle>
+                  <PpomCount>
+                    <PpomNum>{goal.pomo}</PpomNum> ppom
+                  </PpomCount>
+                </GoalWrap>
+            }
           </Segment>
         ))
       }
