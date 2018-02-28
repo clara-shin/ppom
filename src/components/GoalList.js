@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Segment } from 'semantic-ui-react';
 
 const GoalListWrap = styled.div`
-  margin:20px;
+  padding:20px;
 `;
 
 const GoalWrap = styled.a`

@@ -10,14 +10,9 @@ import styled from 'styled-components';
 import Header from './Header';
 // 헤더 공통으로 쓸 예정
 
-const FormLabel = styled.label`
-  display:inline-block;
-  width: 40%;
-`;
-
 const Wrapper = styled.div`
   position:relative;
-  width: 100vw;
+  /* width: 100vw; */
   height: 100vh;
 `;
 

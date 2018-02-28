@@ -7,7 +7,6 @@ import FloatingNav from '../components/FloatingNav';
 
 const Wrapper = styled.div`
   position:relative;
-  height: 100vh;
 `;
 
 const ListPage = () => (
