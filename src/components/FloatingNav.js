@@ -86,32 +86,29 @@ export default class FloatingNav extends Component {
             onClick={this.handleNavToggle}
           />
 
-        <Gnb className={`gnb ${active ? 'gnbshow' : ''}`}>
-          <GnbList>
-            <span>가이드북</span>
-            <NavLink className={active ? 'show' : 'hide'}>
-              <Icon className="icon icon-book" />
-            </NavLink>
-          </GnbList>
-          <GnbList>
-            <span>로그아웃</span>
-            <NavLink className={active ? 'show' : 'hide'}>
-              <Icon className="icon icon-logout" />
-            </NavLink>
-          </GnbList>
-          <GnbList>
-            <span>뽀모편집</span>
-            <NavLink className={active ? 'show' : 'hide'} onClick={this.handleClickEdit}>
-              <Icon className="icon icon-pencil" />
-            </NavLink>
-          </GnbList>
-        </Gnb>
+          <Gnb className={`gnb ${active ? 'gnbshow' : ''}`}>
+            <GnbList>
+              <span>가이드북</span>
+              <NavLink className={active ? 'show' : 'hide'}>
+                <Icon className="icon-book" />
+              </NavLink>
+            </GnbList>
+            <GnbList>
+              <span>로그아웃</span>
+              <NavLink className={active ? 'show' : 'hide'}>
+                <Icon className="icon-logout-1" />
+              </NavLink>
+            </GnbList>
+            <GnbList>
+              <span>목표편집</span>
+              <NavLink className={active ? 'show' : 'hide'} onClick={this.handleClickEdit}>
+                <Icon className="icon-pencil-1" />
+              </NavLink>
+            </GnbList>
+          </Gnb>
 
-        <Dimmer active={active} page />
-      </Navigation>
-
+          <Dimmer active={active} page />
         </Navigation>
-        <Dimmer active={active} />
       </div>
     );
   }
