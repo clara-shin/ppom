@@ -27,6 +27,9 @@ const HeaderLink = styled(Link)`
   font-size: 16px;
   border-radius: 2px;
   color: #fff;
+  &:link, &:visited {
+    color: #fff;
+  }
   &:hover, &:focus, &:active {
     color: #fff;
   }
