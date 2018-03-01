@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import FormInput, { FormLabel } from './FormInput';
 
 const Wrapper = styled.div`
-  position:relative;
-  height: 100vh;
+
 `;
 const GoalFormWrap = styled.div`
   padding:20px;
+  height:85vh;
 `;
 const ButtonWrap = styled.div`
   width:60%;
@@ -79,7 +79,6 @@ export default class GoalMakeForm extends Component {
 
     return (
       <Wrapper>
-        <Header />
         <GoalFormWrap>
           <Form loading={creating}>
             <Form.Field required>

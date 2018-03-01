@@ -22,6 +22,7 @@ export const Button = styled.button`
 
 const HeaderLink = styled(Link)`
   display:block;
+  width:49.45px;
   padding:10px;
   font-size: 16px;
   border-radius: 2px;
