@@ -13,12 +13,12 @@ export const FormLabel = styled.label`
 export default class FormInput extends Component {
   render() {
     const {
-    name, type, value, handleChange, label
-} = this.props;
+      name, type, value, handleChange, label,
+    } = this.props;
     return (
       <Form.Field inline required>
         <FormLabel>{label}</FormLabel>
-        <Input name={name} type={type} value={value} onChange={handleChange}/> 분
+        <Input name={name} type={type} value={value} onChange={handleChange} /> 분
       </Form.Field>
     );
   }
