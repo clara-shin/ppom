@@ -4,22 +4,17 @@ export const CREATING = 'goal/CREATING';
 export const SUCCESS = 'goal/SUCCESS';
 export const ERROR = 'goal/ERROR';
 export const UPDATEPRESET = 'goal/UPDATEPRESET';
-export const UPDATING = 'goal/UPDATING';
 
 export function goalCreating() {
   return {
     type: CREATING,
   };
 }
+
 export function goalUpdatePreset(goalDetail) {
   return {
     type: UPDATEPRESET,
     goalDetail,
-  };
-}
-export function goalUpdating() {
-  return {
-    type: UPDATING,
   };
 }
 
@@ -59,14 +54,6 @@ export default function (state = initialState, action) {
       return {
         creating: false,
         success: true,
-        errorMsg: '',
-        checkingItem: '',
-        goalDetail: null,
-      };
-    case UPDATING:
-      return {
-        creating: false,
-        success: false,
         errorMsg: '',
         checkingItem: '',
         goalDetail: null,
@@ -137,17 +124,11 @@ export const createGoal = ({
 
 export const fetchGoal = ({ gid }) => async (dispatch) => {
   // firebase.auth()를 가져오지 못하는 문제있음
-  // const { currentUser } = firebase.auth();
-  // if (currentUser && gid) {
-  //   const snapshot = await firebase.database().ref(`goals/${currentUser.uid}/${gid}`).once('value');
-  //   const obj = snapshot.val();
-  //   dispatch(goalUpdatePreset(obj));
-  // }
-  if (gid) {
-    const snapshot = await firebase.database().ref(`goals/dY7lr0Mbm2b1nkyRWxEboxwuaGl1/${gid}`).once('value');
+  const { currentUser } = firebase.auth();
+  if (currentUser && gid) {
+    const snapshot = await firebase.database().ref(`goals/${currentUser.uid}/${gid}`).once('value');
     const obj = Object.assign(snapshot.val(), { gid });
     dispatch(goalUpdatePreset(obj));
-    dispatch(goalUpdating());
   }
 };
 
