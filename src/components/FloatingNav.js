@@ -5,8 +5,14 @@ import {
   Dimmer,
   Icon,
 } from 'semantic-ui-react';
-import { Link } from './Header';
 
+const CustomButton = styled.button`
+  display: inline-block;
+  margin:0;
+  padding:0;
+  cursor:pointer;
+`;
+const Link = CustomButton.withComponent('a');
 const Navigation = styled.nav`
   position: fixed;
   right:30px;
