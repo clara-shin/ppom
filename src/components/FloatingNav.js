@@ -6,9 +6,13 @@ import {
   Icon,
 } from 'semantic-ui-react';
 
-import { Link } from './Header';
-
-
+const CustomButton = styled.button`
+  display: inline-block;
+  margin:0;
+  padding:0;
+  cursor:pointer;
+`;
+const Link = CustomButton.withComponent('a');
 const Navigation = styled.nav`
   position: fixed;
   right:30px;
@@ -50,6 +54,10 @@ const NavLink = Link.extend`
   box-shadow: 1px 2px 3px #848484;
 `;
 export default class FloatingNav extends Component {
+  static defaultProps = {
+    onClickEdit: () => {},
+  }
+
   state = {
     active: false,
   }
@@ -69,12 +77,12 @@ export default class FloatingNav extends Component {
   // 뽀모수정 버튼 클릭 시 이벤트처리
   handleClickEdit = () => {
     if (this.state.active) {
-      this.props.onClickEdit();
+      this.props.onClickEdit(true);
+      this.handleNavToggle();
     }
   }
   render() {
     const { active } = this.state;
-
     return (
       <div>
         <Navigation>
@@ -88,25 +96,25 @@ export default class FloatingNav extends Component {
             <GnbList>
               <span>가이드북</span>
               <NavLink className={active ? 'show' : 'hide'}>
-                <Icon className="icon icon-book" />
+                <Icon className="icon-book" />
               </NavLink>
             </GnbList>
             <GnbList>
               <span>로그아웃</span>
               <NavLink className={active ? 'show' : 'hide'}>
-                <Icon className="icon icon-logout-1" />
+                <Icon className="icon-logout-1" />
               </NavLink>
             </GnbList>
             <GnbList>
               <span>목표편집</span>
-              <NavLink className={active ? 'show' : 'hide'} onClickEdit={this.handleClickEdit}>
-                <Icon className="icon icon-pencil-1" />
+              <NavLink className={active ? 'show' : 'hide'} onClick={this.handleClickEdit}>
+                <Icon className="icon-pencil-1" />
               </NavLink>
             </GnbList>
           </Gnb>
 
+          <Dimmer active={active} page />
         </Navigation>
-        <Dimmer active={active} />
       </div>
     );
   }

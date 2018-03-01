@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Segment } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const GoalListWrap = styled.div`
   padding:20px;
 `;
 
-const GoalWrap = styled.a`
+const GoalWrap = styled(Link)`
   display: flex;
   justify-content:flex-start;
   width:100%;
@@ -65,20 +66,25 @@ const GoalTitle = styled.div`
 export default class GoalList extends Component {
   static defaultProps = {
     goals: [],
+    isEditList: false,
   }
 
   render() {
-    const { goals } = this.props;
+    const { goals, isEditList } = this.props;
+    const goalWrapClassName = (isEditList) ? 'icon icon-right-open' : 'icon';
+    const linkTo = (isEditList) ? 'edit-goal/' : 'timer/';
     return (
       <GoalListWrap>{
         goals.map(({ gid, ...goal }) => (
           <Segment key={gid} stacked>
-            <GoalWrap className="icon icon-right-open">{/* 플로팅네비게이션 목표수정 메뉴 클릭 시 icon-right-open 추가 */}
-              <GoalTitle>{goal.goal}</GoalTitle>
-              <PpomCount>
-                <PpomNum>{goal.pomo}</PpomNum> ppom
-              </PpomCount>
-            </GoalWrap>
+            {
+              <GoalWrap className={goalWrapClassName} to={`${linkTo}${gid}`}>
+                <GoalTitle>{goal.goal}</GoalTitle>
+                <PpomCount>
+                  <PpomNum>{goal.pomo}</PpomNum> ppom
+                </PpomCount>
+              </GoalWrap>
+            }
           </Segment>
         ))
       }

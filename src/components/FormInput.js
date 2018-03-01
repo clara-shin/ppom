@@ -22,7 +22,6 @@ export default class FormInput extends Component {
     const {
       name, type, value, handleChange, label,
     } = this.props;
-
     return (
       <FormInputWrap>
         <Form.Field inline required>

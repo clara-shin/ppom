@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Form, TextArea, Button, Message } from 'semantic-ui-react';
 import styled from 'styled-components';
-import Header from './Header';
 import FormInput, { FormLabel } from './FormInput';
-// 헤더 공통으로 쓸 예정
 
 const Wrapper = styled.div`
   position:relative;
@@ -20,19 +18,37 @@ const PpomSet = styled.strong`
 `;
 export default class GoalMakeForm extends Component {
   static defaultProps = {
-    errorMsg: '',
-    onSubmit: () => {},
-    onChange: () => {},
     creating: false,
+    errorMsg: '',
+    onChange: () => {},
+    onSubmit: () => {},
+    goalDetail: {},
   }
 
   state = {
+    gid: '',
     goal: '',
     ppomtime: 25,
     breaktime: 5,
     longbreaktime: 20,
     longbreakfrqncy: 4,
     checkingItem: '',
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.goalDetail) {
+      const {
+        gid, goal, ppomtime, breaktime, longbreaktime, longbreakfrqncy,
+      } = nextProps.goalDetail;
+      this.setState({
+        gid,
+        goal,
+        ppomtime,
+        breaktime,
+        longbreaktime,
+        longbreakfrqncy,
+      });
+    }
   }
 
   handleChange = (e, { name, value }) => {
@@ -56,10 +72,11 @@ export default class GoalMakeForm extends Component {
   }
 
   render() {
-    const {
-      goal, ppomtime, breaktime, longbreakfrqncy, longbreaktime,
-    } = this.state;
     const { errorMsg, creating } = this.props;
+    const {
+      goal, ppomtime, breaktime, longbreaktime, longbreakfrqncy,
+    } = this.state;
+
     return (
       <Wrapper>
         <Header />
@@ -107,6 +124,7 @@ export default class GoalMakeForm extends Component {
           </Form>
         </GoalFormWrap>
         <Button type="submit" onClick={this.handleSubmit} fluid size="big" className="btn-submit">저장</Button>
+
       </Wrapper>
     );
   }

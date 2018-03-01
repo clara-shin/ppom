@@ -3,10 +3,18 @@ import * as firebase from 'firebase';
 export const CREATING = 'goal/CREATING';
 export const SUCCESS = 'goal/SUCCESS';
 export const ERROR = 'goal/ERROR';
+export const UPDATEPRESET = 'goal/UPDATEPRESET';
 
 export function goalCreating() {
   return {
     type: CREATING,
+  };
+}
+
+export function goalUpdatePreset(goalDetail) {
+  return {
+    type: UPDATEPRESET,
+    goalDetail,
   };
 }
 
@@ -28,11 +36,8 @@ const initialState = {
   creating: false,
   success: false,
   errorMsg: '',
-  goal: '',
-  ppomtime: 25,
-  breaktime: 5,
-  longbreaktime: 20,
-  longbreakfrqncy: 4,
+  checkingItem: '',
+  goalDetail: null,
 };
 
 export default function (state = initialState, action) {
@@ -43,11 +48,7 @@ export default function (state = initialState, action) {
         success: false,
         errorMsg: '',
         checkingItem: '',
-        goal: '',
-        ppomtime: 0,
-        breaktime: 0,
-        longbreaktime: 0,
-        longbreakfrqncy: 0,
+        goalDetail: null,
       };
     case SUCCESS:
       return {
@@ -55,11 +56,15 @@ export default function (state = initialState, action) {
         success: true,
         errorMsg: '',
         checkingItem: '',
-        goal: action.goal,
-        ppomtime: action.ppomtime,
-        breaktime: action.breaktime,
-        longbreaktime: action.longbreaktime,
-        longbreakfrqncy: action.longbreakfrqncy,
+        goalDetail: null,
+      };
+    case UPDATEPRESET:
+      return {
+        creating: false,
+        success: false,
+        errorMsg: '',
+        checkingItem: '',
+        goalDetail: action.goalDetail,
       };
     case ERROR:
       return {
@@ -67,11 +72,7 @@ export default function (state = initialState, action) {
         success: false,
         errorMsg: action.errorMsg,
         checkingItem: '',
-        goal: '',
-        ppomtime: 0,
-        breaktime: 0,
-        longbreaktime: 0,
-        longbreakfrqncy: 0,
+        goalDetail: null,
       };
     default:
       return state;
@@ -79,7 +80,7 @@ export default function (state = initialState, action) {
 }
 
 export const createGoal = ({
-  goal, ppomtime, breaktime, longbreaktime, longbreakfrqncy,
+  goal, ppomtime, breaktime, longbreaktime, longbreakfrqncy, gid,
 }) => async (dispatch) => {
   // goalObj 유효성 체크
   // if (!goal ) {
@@ -94,18 +95,40 @@ export const createGoal = ({
   dispatch(goalCreating());
 
   try {
-    await firebase.database().ref(`goals/${currentUser.uid}`).push({
-      goal,
-      ppomtime,
-      breaktime,
-      longbreaktime,
-      longbreakfrqncy,
-      createdAt: firebase.database.ServerValue.TIMESTAMP,
-      updatedAt: firebase.database.ServerValue.TIMESTAMP,
-    });
+    if (gid) {
+      await firebase.database().ref(`goals/${currentUser.uid}/${gid}`).update({
+        goal,
+        ppomtime,
+        breaktime,
+        longbreaktime,
+        longbreakfrqncy,
+        updatedAt: firebase.database.ServerValue.TIMESTAMP,
+      });
+    } else {
+      await firebase.database().ref(`goals/${currentUser.uid}`).push({
+        goal,
+        ppomtime,
+        breaktime,
+        longbreaktime,
+        longbreakfrqncy,
+        createdAt: firebase.database.ServerValue.TIMESTAMP,
+        updatedAt: firebase.database.ServerValue.TIMESTAMP,
+      });
+    }
     dispatch(goalSuccess());
   } catch (e) {
     dispatch(goalError(`알 수 없는 에러가 발생했습니다. 다시 시도해 주세요: ${e.message}`));
+  }
+};
+
+
+export const fetchGoal = ({ gid }) => async (dispatch) => {
+  // firebase.auth()를 가져오지 못하는 문제있음
+  const { currentUser } = firebase.auth();
+  if (currentUser && gid) {
+    const snapshot = await firebase.database().ref(`goals/${currentUser.uid}/${gid}`).once('value');
+    const obj = Object.assign(snapshot.val(), { gid });
+    dispatch(goalUpdatePreset(obj));
   }
 };
 
