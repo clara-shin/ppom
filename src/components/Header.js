@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import { Menu } from 'semantic-ui-react'
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Wrap = styled.header`
   display:flex;
@@ -18,9 +18,9 @@ export const Button = styled.button`
   padding:0;
   cursor:pointer;
 `;
-export const Link = Button.withComponent('a');
+// export const Link = Button.withComponent('a');
 
-export const HeaderLink = Link.extend`
+const HeaderLink = styled(Link)`
   display:block;
   padding:10px;
   font-size: 16px;
@@ -40,12 +40,40 @@ export const Title = styled.h1`
 `;
 
 export default class Header extends Component {
+  state = {
+    leftTo: '',
+    leftLabel: '',
+    title: '',
+    rightTo: '',
+    rightLabel: '',
+  };
+
+  handleClick = () => {
+    if (!this.props.leftTo) {
+      this.props.history.goBack();
+    }
+  }
   render() {
+    const tempProps = {};
+    Object.assign(tempProps, this.state);
+    Object.entries(this.props).forEach(([key, value]) => {
+      tempProps[key] = value;
+    });
+    const {
+      leftTo,
+      leftLabel,
+      title,
+      rightTo,
+      rightLabel,
+    } = tempProps;
+
     return (
       <Wrap>
-        <HeaderLink href="/make-goal">추가</HeaderLink>
-        <Title>목표</Title>
-        <HeaderLink>기록</HeaderLink>
+        <HeaderLink to={leftTo} onClick={this.handleClick}>
+          {leftLabel}
+        </HeaderLink>
+        <Title>{title}</Title>
+        <HeaderLink to={rightTo}>{rightLabel}</HeaderLink>
       </Wrap>
     );
   }
