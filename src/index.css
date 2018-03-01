@@ -29,7 +29,7 @@ a:hover, a:focus, a:active{
   color:#181818;
 }
 
-input, textarea {
+input {
   display: inline-block;
   padding: 5px 8px;
   box-sizing: border-box;
@@ -42,8 +42,8 @@ label {
   width:50% !important;
   margin:0 !important;
   line-height:2;
-
 }
+
 /* remove inner-button */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -96,6 +96,7 @@ i.icon{
 }
 .ui.form .field>div.dispBlock{
   display:block;
+  width:100%;
 }
 .ui.form .field>label{
   font-weight:400 !important;
@@ -147,13 +148,17 @@ i.icon{
 
 .ui.fluid.button, .ui.fluid.buttons {
   position: absolute;
-  bottom: 2%;
-  width: 90%;
-  height: 7%;
+  bottom: 0%;
+  width: 100%;
+  height: 8.5%;
   left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
   transform: translateX(-50%);
-  margin:0;
-  font-weight:400 !important;
+  margin: 0;
+  font-weight: 400 !important;
+  border-radius: 0;
+  font-size: 20px;
 }
 /* 저장버튼 */
 /* .ui.button.btn-submit{} */
