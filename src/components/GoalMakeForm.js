@@ -6,9 +6,7 @@ import {
   Message,
 } from 'semantic-ui-react';
 import styled from 'styled-components';
-import Header from './Header';
 import FormInput, { FormLabel } from './FormInput';
-// 헤더 공통으로 쓸 예정
 
 const Wrapper = styled.div`
   position:relative;
@@ -35,11 +33,11 @@ export default class GoalMakeForm extends Component {
     checkingItem: '',
   }
 
-  componentWillReceiveProps() {
-    if (this.props.goalDetail) {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.goalDetail) {
       const {
         gid, goal, ppomtime, breaktime, longbreaktime, longbreakfrqncy,
-      } = this.props.goalDetail;
+      } = nextProps.goalDetail;
       this.setState({
         gid,
         goal,
@@ -79,7 +77,6 @@ export default class GoalMakeForm extends Component {
 
     return (
       <Wrapper>
-        <Header />
         <strong>필수입력 *</strong>
         <Form loading={creating}>
           <Form.Field
@@ -93,9 +90,9 @@ export default class GoalMakeForm extends Component {
             value={goal}
             required
           />
-          <FormInput name="ppomtime" type="number" value={ppomtime} onChange={this.handleChange}  label="집중시간"/>
+          <FormInput name="ppomtime" type="number" value={ppomtime} onChange={this.handleChange} label="집중시간" />
 
-          <FormInput name="breaktime" type="number" value={breaktime} onChange={this.handleChange} label="쉬는 시간"/>
+          <FormInput name="breaktime" type="number" value={breaktime} onChange={this.handleChange} label="쉬는 시간" />
 
           <Form.Field inline required>
             <FormLabel>긴 휴식 간격</FormLabel>
@@ -104,7 +101,7 @@ export default class GoalMakeForm extends Component {
             <span>{longbreakfrqncy}</span> 마다
           </Form.Field>
 
-          <FormInput name="longbreaktime" type="number" value={longbreaktime} onChange={this.handleChange} label="긴 쉬는 시간"/>
+          <FormInput name="longbreaktime" type="number" value={longbreaktime} onChange={this.handleChange} label="긴 쉬는 시간" />
           {
             errorMsg && (
               <Message negative>
