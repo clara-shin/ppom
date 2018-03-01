@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Segment } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const GoalListWrap = styled.div`
   padding:20px;
 `;
 
-const GoalWrap = styled.a`
+const GoalWrap = styled(Link)`
   display: flex;
   justify-content:flex-start;
   width:100%;
@@ -62,14 +63,6 @@ const GoalTitle = styled.div`
   font-size:1.4em;
 `;
 
-const GoalEdit = styled.div`
-  display:block;
-  float:left;
-  font-size: 1.4em;
-  color: red;
-  line-height: 1.4;
-`;
-
 export default class GoalList extends Component {
   static defaultProps = {
     goals: [],
@@ -78,29 +71,19 @@ export default class GoalList extends Component {
 
   render() {
     const { goals, isEditList } = this.props;
+    const goalWrapClassName = (isEditList) ? 'icon icon-right-open' : 'icon';
+    const linkTo = (isEditList) ? 'edit-goal/' : 'timer/';
     return (
       <GoalListWrap>{
         goals.map(({ gid, ...goal }) => (
           <Segment key={gid} stacked>
             {
-              (isEditList)
-              ?
-                <GoalWrap href={`edit-goal/${gid}`} className="icon icon-right-open">{/* 플로팅네비게이션 목표수정 메뉴 클릭 시 icon-right-open 추가 */}
-                  <GoalEdit>편집</GoalEdit>
-                  <GoalTitle>
-                    {goal.goal}
-                  </GoalTitle>
-                  <PpomCount>
-                    <PpomNum>{goal.pomo}</PpomNum> ppom
-                  </PpomCount>
-                </GoalWrap>
-              :
-                <GoalWrap className="icon icon-right-open">{/* 플로팅네비게이션 목표수정 메뉴 클릭 시 icon-right-open 추가 */}
-                  <GoalTitle>{goal.goal}</GoalTitle>
-                  <PpomCount>
-                    <PpomNum>{goal.pomo}</PpomNum> ppom
-                  </PpomCount>
-                </GoalWrap>
+              <GoalWrap className={goalWrapClassName} to={`${linkTo}${gid}`}>
+                <GoalTitle>{goal.goal}</GoalTitle>
+                <PpomCount>
+                  <PpomNum>{goal.pomo}</PpomNum> ppom
+                </PpomCount>
+              </GoalWrap>
             }
           </Segment>
         ))
