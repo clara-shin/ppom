@@ -3,11 +3,12 @@ import thunk from 'redux-thunk';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import LoginScreenContainer from './containers/LoginScreenContainer';
+import LoginPage from './containers/LoginPage';
 import withAuth from './hocs/withAuth';
 import rootReducer from './ducks';
 import ListPage from './containers/ListPage';
-import GoalMakeFormContainer from './containers/GoalMakeFormContainer';
+import GoalPage from './containers/GoalPage';
+import TimerPage from './containers/TimerPage';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 const Home = withAuth(() => <Redirect to="/list" />);
@@ -19,10 +20,11 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Route path="/" exact component={Home} />
-            <Route path="/login" component={LoginScreenContainer} />
+            <Route path="/login" component={LoginPage} />
             <Route path="/list" component={ListPage} />
-            <Route path="/make-goal" component={GoalMakeFormContainer} />
-            <Route path="/edit-goal/:gid" component={GoalMakeFormContainer} />
+            <Route path="/make-goal" component={GoalPage} />
+            <Route path="/edit-goal/:gid" component={GoalPage} />
+            <Route path="/timer/:gid" component={TimerPage} />
           </div>
         </BrowserRouter>
       </Provider>
