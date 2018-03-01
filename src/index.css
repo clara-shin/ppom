@@ -16,8 +16,8 @@ body {
   line-height: 1;
   box-sizing: border-box;
 }
-h1,h2,h3,h4,h5,h6{
-  font-family: 'Spoqa Han Sans', sans-serif;
+h1,h2,h3,h4,h5,h6, input, label, textarea, button{
+  font-family: 'Spoqa Han Sans' !important;
 }
 ul {
   list-style-type: none;
@@ -29,6 +29,28 @@ a:hover, a:focus, a:active{
   color:#181818;
 }
 
+input, textarea {
+  display: inline-block;
+  padding: 5px 8px;
+  box-sizing: border-box;
+  font-size: 20px !important;
+  resize: none !important;
+  font-family: 'Spoqa Han Sans' !important;
+}
+label {
+  font-size:20px !important;
+  width:50% !important;
+  margin:0 !important;
+  line-height:2;
+
+}
+/* remove inner-button */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    width: 30% !important;
+}
 /* fontello 아이콘 설정*/
 i.icon{
   display:inline-block;
@@ -56,9 +78,96 @@ i.icon{
 .ui.dimmer{
   z-index:initial !important;
 }
+.ui.form {
+  font-size:20px;
+}
+.ui.form .field {
+  margin-bottom:10px !important;
+}
+.ui.form .field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ui.form .field>div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ui.form .field>div.dispBlock{
+  display:block;
+}
+.ui.form .field>label{
+  font-weight:400 !important;
+}
+.ui.form .field>div>label{
+  display: block;
+  margin: 0 0 .28571429rem 0;
+  color: rgba(0,0,0,.87);
+  font-size: .92857143em;
+  font-weight: 400 !important;
+  text-transform: none;
+}
+.ui.form .required.field>div>label:after{
+  margin: -.2em 0 0 .2em;
+  content: '*';
+  color: #db2828;
+}
+.ui.form .field .ui.input {
+  width:120px !important;
+}
+.ui.form .field .ui.input input[type="number"] {
+  text-align: center;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid #f2f2f2;
+  border-radius: 0;
+}
+.ui.form .field .ui.input input[type="number"]::-moz-focus-inner::after {
+  content:'';
+  position: absolute;
+  width:100%;
+  height:1px;
+  bottom:0;
+  right:0;
+  border-bottom: 1px solid red;
+}
+.ui.form .field .ui.input::after {
+  content:'분';
+  position: absolute;
+  top:50%;
+  right:0%;
+  transform: translateY(-50%);
+}
 
+.ui.buttons .button {
+  width:50px;
+  height:50px;
+}
 
+.ui.fluid.button, .ui.fluid.buttons {
+  position: absolute;
+  bottom: 2%;
+  width: 90%;
+  height: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin:0;
+  font-weight:400 !important;
+}
+/* 저장버튼 */
+/* .ui.button.btn-submit{} */
 
+/* 목표설정 제대로 입력 시 저장버튼 활성화 .active 클래스 추가 */
+.ui.button.btn-submit.active{
+  color:#fff;
+  background-color:#556bb3;
+}
+
+.ui.message .header:not(.ui){
+  font-size:16px;
+  font-weight:400;
+}
 @keyframes spreadUp {
   0% {
     transform: translateY(10px);

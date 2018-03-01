@@ -6,20 +6,30 @@ import {
 import styled from 'styled-components';
 
 export const FormLabel = styled.label`
-  display: inline-block;
+  display: block;
+  float:left;
   width: 40%;
 `;
-
+const FormInputWrap = styled.div`
+  $:after {
+    content:'',
+    display:block;
+    clear:both;
+  }
+`;
 export default class FormInput extends Component {
   render() {
     const {
-    name, type, value, handleChange, label
-} = this.props;
+      name, type, value, handleChange, label,
+    } = this.props;
+
     return (
-      <Form.Field inline required>
-        <FormLabel>{label}</FormLabel>
-        <Input name={name} type={type} value={value} onChange={handleChange}/> 분
-      </Form.Field>
+      <FormInputWrap>
+        <Form.Field inline required>
+          <FormLabel>{label}</FormLabel>
+          <Input name={name} type={type} value={value} onChange={handleChange} />
+        </Form.Field>
+      </FormInputWrap>
     );
   }
 }
