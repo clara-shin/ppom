@@ -56,6 +56,7 @@ const NavLink = Link.extend`
 export default class FloatingNav extends Component {
   static defaultProps = {
     onClickEdit: () => {},
+    onClickLogout: () => {},
   }
 
   state = {
@@ -81,6 +82,12 @@ export default class FloatingNav extends Component {
       this.handleNavToggle();
     }
   }
+
+  handleClickLogout = () => {
+    this.props.onClickLogout();
+    this.handleNavToggle();
+  }
+
   render() {
     const { active } = this.state;
     return (
@@ -101,7 +108,7 @@ export default class FloatingNav extends Component {
             </GnbList>
             <GnbList>
               <span>로그아웃</span>
-              <NavLink className={active ? 'show' : 'hide'}>
+              <NavLink className={active ? 'show' : 'hide'} onClick={this.handleClickLogout}>
                 <Icon className="icon-logout-1" />
               </NavLink>
             </GnbList>

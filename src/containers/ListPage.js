@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import withAuth from '../hocs/withAuth';
 import GoalListContainer from './GoalListContainer';
@@ -12,6 +14,7 @@ const Wrapper = styled.div`
 class ListPage extends Component {
   state = {
     isEditList: false,
+    isLogout: false,
   }
 
   onEditGoals = (isEdit) => {
@@ -20,8 +23,15 @@ class ListPage extends Component {
     });
   }
 
+  onClickLogout = async () => {
+    await firebase.auth().signOut();
+    this.setState({
+      isLogout: true,
+    });
+  }
+
   render() {
-    const { isEditList } = this.state;
+    const { isEditList, isLogout } = this.state;
     const leftFunc = () => {
       this.props.history.push('/make-goal');
     };
@@ -32,6 +42,11 @@ class ListPage extends Component {
       this.props.history.goBack();
     };
 
+    if (isLogout) {
+      return (
+        <Redirect to="/login" />
+      );
+    }
     return (
       <Wrapper>
         {
@@ -45,7 +60,7 @@ class ListPage extends Component {
           )
         }
         <GoalListContainer isEditList={isEditList} />
-        <FloatingNav onClickEdit={this.onEditGoals} />
+        <FloatingNav onClickEdit={this.onEditGoals} onClickLogout={this.onClickLogout} />
       </Wrapper>
     );
   }
