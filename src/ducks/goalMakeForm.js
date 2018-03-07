@@ -98,7 +98,6 @@ export const createGoal = ({
     return;
   }
   dispatch(goalCreating());
-
   try {
     if (gid) {
       await firebase.database().ref(`goals/${currentUser.uid}/${gid}`).update({
