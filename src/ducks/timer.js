@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import * as moment from 'moment';
 
 export const PRESET_TIMER = 'PRESET_TIMER';
 
@@ -13,11 +14,12 @@ export const END_TIMER = 'END_TIMER';
 
 export const ADD_SECOND = 'ADD_SECOND';
 
-export function presetTimer(timerDetail, pomo) {
+export function presetTimer(timerDetail, pomo, time) {
   return {
     type: PRESET_TIMER,
     timerDetail,
     ppomTimes: pomo,
+    time,
   };
 }
 
@@ -33,21 +35,24 @@ export function pauseTimer() {
   };
 }
 
-export function ppomTimer() {
+export function ppomTimer(time) {
   return {
     type: PPOM_TIMER,
+    time,
   };
 }
 
-export function breakTimer() {
+export function breakTimer(time) {
   return {
     type: BREAK_TIMER,
+    time,
   };
 }
 
-export function longBreakTimer() {
+export function longBreakTimer(time) {
   return {
     type: LONG_BREAK_TIMER,
+    time,
   };
 }
 
@@ -77,13 +82,19 @@ const initialState = {
   ppomTimes: 0,
   timerDetail: {},
   tid: '',
+  goalTime: 0,
 };
+
+const INTERVAL_TIME = 100;
+const MINUTE = 60;
+const mm = moment();
+const DATE_FORMAT = 'YYYY-MM-DD';
 
 function isLongBreakTime(ppomtimes, frqncy) {
   return (ppomtimes % frqncy === 0);
 }
 
-function setBreakTimer(state, type) {
+function setBreakTimer(state, type, time) {
   const breakQuotes = (type === BREAK_TIMER)
     ? ['잘 하고 있어요', '멋지게 해냈어요', '쉬고 다시 갈까요?']
     : ['잘 쉬는 것도 중요해요!', '바깥 바람 좀 쐬고 올까요?', '오직 나를 위한 시간'];
@@ -96,13 +107,8 @@ function setBreakTimer(state, type) {
     elapsedTime: 0,
     isPlaying: false,
     timerDetail: state.timerDetail,
+    goalTime: time,
   };
-}
-
-function getTodayDate() {
-  const date = new Date(); // Or the date you'd like converted.
-  const today = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
-  return today.toISOString().split('T')[0];
 }
 
 export default function (state = initialState, action) {
@@ -113,6 +119,7 @@ export default function (state = initialState, action) {
         timerType: PPOM_TIMER,
         timerDetail: action.timerDetail,
         ppomTimes: action.ppomTimes,
+        goalTime: action.time,
       };
     case START_TIMER:
       return {
@@ -132,21 +139,24 @@ export default function (state = initialState, action) {
         tid: '',
       };
     case BREAK_TIMER:
-      return setBreakTimer(state, action.type);
+      return setBreakTimer(state, action.type, action.time);
     case LONG_BREAK_TIMER:
-      return setBreakTimer(state, action.type);
+      return setBreakTimer(state, action.type, action.time);
     case PPOM_TIMER:
       return {
         ...state,
         timerType: PPOM_TIMER,
         elapsedTime: 0,
+        goalTime: action.time,
         isPlaying: false,
       };
     case END_TIMER:
       return {
         ...state,
+        timerType: '',
         isPlaying: false,
         tid: '',
+        elapsedTime: 0,
       };
     case ADD_SECOND:
       return {
@@ -163,34 +173,35 @@ export const fetchTimerInfo = ({ gid }) => async (dispatch) => {
   const { currentUser } = firebase.auth();
   if (currentUser && gid) {
     const goalsSnap = firebase.database().ref(`goals/${currentUser.uid}/${gid}`).once('value');
-    const achieveSnap = firebase.database().ref(`achieves/${currentUser.uid}/${gid}/${getTodayDate()}`).once('value');
+    const achieveSnap = firebase.database().ref(`achieves/${currentUser.uid}/${gid}/${mm.format(DATE_FORMAT)}`).once('value');
     const snapArr = await Promise.all([goalsSnap, achieveSnap]);
     const goalObj = snapArr[0].val();
     const achieveObj = snapArr[1].val();
     const obj = Object.assign(goalObj, { gid });
     const pomo = (achieveObj && 'pomo' in achieveObj) ? achieveObj.pomo : 0;
-    dispatch(presetTimer(obj, pomo));
+    const time = obj.ppomtime * MINUTE;
+    dispatch(presetTimer(obj, pomo, time));
   }
 };
 
 export const applyAddSecond = timerInterval => async (dispatch, getState) => {
   const {
-    elapsedTime, timerDetail, timerType, ppomTimes,
+    elapsedTime, timerDetail, timerType, ppomTimes, goalTime,
   } = getState().timer;
   const {
-    gid, goal, ppomtime,
+    gid, goal, ppomtime, breaktime, longbreaktime,
   } = timerDetail;
-  // if (elapsedTime < ppomtime * 60) {
-  if (elapsedTime < 5) {
+  if (elapsedTime < goalTime) {
     dispatch(addSecond(timerInterval));
   } else {
     clearInterval(timerInterval);
     if (timerType === PPOM_TIMER) {
+      dispatch(endTimer());
       const { currentUser } = firebase.auth();
       if (!currentUser) {
         return;
       }
-      const ref = `achieves/${currentUser.uid}/${gid}/${getTodayDate()}`;
+      const ref = `achieves/${currentUser.uid}/${gid}/${mm.format(DATE_FORMAT)}`;
       const snapshot = await firebase.database().ref(ref).once('value');
       const achieve = snapshot.val();
       if (achieve) {
@@ -207,12 +218,12 @@ export const applyAddSecond = timerInterval => async (dispatch, getState) => {
         });
       }
       if (isLongBreakTime(ppomTimes + 1, timerDetail.longbreakfrqncy)) {
-        dispatch(longBreakTimer());
+        dispatch(longBreakTimer(longbreaktime * MINUTE));
       } else {
-        dispatch(breakTimer());
+        dispatch(breakTimer(breaktime * MINUTE));
       }
-    } else {
-      dispatch(ppomTimer());
+    } else if (timerType === BREAK_TIMER || timerType === LONG_BREAK_TIMER) {
+      dispatch(ppomTimer(ppomtime * MINUTE));
     }
   }
 };
@@ -225,7 +236,7 @@ export const applyStartTimer = () => async (dispatch, getState) => {
       () => {
         dispatch(applyAddSecond(timerInterval));
       },
-      1000,
+      INTERVAL_TIME,
     );
   }
 };

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import { Dimmer, Loader } from 'semantic-ui-react';
 import stampOn from './Timer/img/tomato_active_70x76.png';
 import stampOff from './Timer/img/tomato_deactive_70x76.png';
 
@@ -132,6 +133,13 @@ export default class Timer extends Component {
     const leftFunc = () => {
       this.props.history.goBack();
     };
+    if (timerType === '') {
+      return (
+        <Dimmer active>
+          <Loader>Loading</Loader>
+        </Dimmer>
+      );
+    }
     return (
       <ThemeProvider theme={theme}>
         <div>
