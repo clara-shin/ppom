@@ -16,6 +16,38 @@ const ButtonWrap = styled.div`
 const PpomSet = styled.strong`
   margin-left:10px;
 `;
+
+const SaveButton = styled(Button)`
+
+  width: 50%;
+  height: 8.5%;
+  font-weight: 400 !important;
+  border-radius: 0;
+  font-size: 20px;
+`;
+const DeleteButton = styled(Button)`
+  width: 50%;
+  height: 8.5%;
+  font-weight: 400 !important;
+  border-radius: 0;
+  font-size: 20px;
+`;
+
+const ButtonGroup = styled.div`
+  display:flex;
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  height: 8.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-weight: 400 !important;
+  border-radius: 0;
+  font-size: 20px;
+`;
+
+
 export default class GoalMakeForm extends Component {
   static defaultProps = {
     creating: false,
@@ -122,8 +154,15 @@ export default class GoalMakeForm extends Component {
             }
           </Form>
         </GoalFormWrap>
-        <Button type="submit" onClick={this.handleSubmit} fluid size="big" className="btn-submit">저장</Button>
 
+        <ButtonGroup>
+
+          <SaveButton type="submit" onClick={this.handleSubmit} fluid size="big" className="btn-submit active">저장</SaveButton>
+
+          {/* <DeleteButton type="submit" size="big" className="btn-delete">삭제</DeleteButton>
+          <SaveButton type="submit" onClick={this.handleSubmit} size="big" className="btn-submit active">저장</SaveButton> */}
+
+        </ButtonGroup>
       </Wrapper>
     );
   }
