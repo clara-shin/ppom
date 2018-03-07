@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import withAuth from '../hocs/withAuth';
 import GoalListContainer from './GoalListContainer';
@@ -12,6 +14,7 @@ const Wrapper = styled.div`
 class ListPage extends Component {
   state = {
     isEditList: false,
+    isLogout: false,
   }
 
   onEditGoals = (isEdit) => {
@@ -20,13 +23,44 @@ class ListPage extends Component {
     });
   }
 
+  onClickLogout = async () => {
+    await firebase.auth().signOut();
+    this.setState({
+      isLogout: true,
+    });
+  }
+
   render() {
-    const { isEditList } = this.state;
+    const { isEditList, isLogout } = this.state;
+    const leftFunc = () => {
+      this.props.history.push('/make-goal');
+    };
+    const rightFunc = () => {
+      this.props.history.push('/record');
+    };
+    const backFunc = () => {
+      this.props.history.goBack();
+    };
+
+    if (isLogout) {
+      return (
+        <Redirect to="/login" />
+      );
+    }
     return (
       <Wrapper>
-        <Header leftLabel="추가" leftTo="/make-goal" title="목표" rightLabel="기록" rightTo="/report" />
+        {
+          isEditList && (
+            <Header title="목표 편집" leftLabel="뒤로" leftFunc={backFunc} />
+          )
+        }
+        {
+          !isEditList && (
+            <Header title="목표" leftLabel="추가" leftFunc={leftFunc} rightLabel="기록" rightFunc={rightFunc} />
+          )
+        }
         <GoalListContainer isEditList={isEditList} />
-        <FloatingNav onClickEdit={this.onEditGoals} />
+        <FloatingNav onClickEdit={this.onEditGoals} onClickLogout={this.onClickLogout} />
       </Wrapper>
     );
   }

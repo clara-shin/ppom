@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createGoal, checkValidGoal, fetchGoal } from '../ducks/goalMakeForm';
+import { createGoal, checkValidGoal, fetchGoal, deleteGoal } from '../ducks/goalMakeForm';
 import GoalMakeForm from '../components/GoalMakeForm';
 // import withLoading from '../hocs/withLoading';
 
 class GoalMakeFormContainer extends Component {
   static defaultProps = {
     onMount: () => { },
+    removeSuccess: false,
   }
 
   componentDidMount() {
@@ -16,8 +17,10 @@ class GoalMakeFormContainer extends Component {
   }
 
   render() {
-    const { onMount, ...rest } = this.props;
-    if (this.props.success) {
+    const {
+      onMount, removeSuccess, success, ...rest
+    } = this.props;
+    if (success || removeSuccess) {
       return (
         <Redirect to="/list" />
       );
@@ -33,6 +36,7 @@ export default connect(
     creating: state.goalMakeForm.creating,
     errorMsg: state.goalMakeForm.errorMsg,
     success: state.goalMakeForm.success,
+    removeSuccess: state.goalMakeForm.removeSuccess,
     checkingItem: state.goalMakeForm.checkingItem,
     goalDetail: state.goalMakeForm.goalDetail,
   }),
@@ -53,6 +57,9 @@ export default connect(
       dispatch(checkValidGoal({
         goal, ppomtime, longbreaktime, longbreakfrqncy, breaktime, checkingItem,
       }));
+    },
+    onDelete: ({ gid }) => {
+      dispatch(deleteGoal({ gid }));
     },
   }),
 )(GoalMakeFormContainer);

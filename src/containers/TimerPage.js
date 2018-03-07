@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  startTimer,
-  pauseTimer,
-  restartTimer,
-  applyAddSecond,
+  applyStartTimer,
+  applyPauseOrRestartTimer,
   fetchTimerInfo,
 } from '../ducks/timer';
 import Timer from '../components/Timer';
@@ -41,16 +39,13 @@ export default withAuth(connect(
       dispatch(fetchTimerInfo({ gid }));
     },
     startTimer: () => {
-      dispatch(startTimer());
+      dispatch(applyStartTimer());
     },
     pauseTimer: () => {
-      dispatch(pauseTimer());
+      dispatch(applyPauseOrRestartTimer(true));
     },
     restartTimer: () => {
-      dispatch(restartTimer());
-    },
-    addSecond: () => {
-      dispatch(applyAddSecond());
+      dispatch(applyPauseOrRestartTimer(false));
     },
   }),
 )(TimerPage));

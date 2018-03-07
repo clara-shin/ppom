@@ -26,7 +26,7 @@ export default class FormInput extends Component {
       <FormInputWrap>
         <Form.Field inline required>
           <FormLabel>{label}</FormLabel>
-          <Input name={name} type={type} value={value} onChange={handleChange} />
+          <Input name={name} type={type} defaultValue={value} onChange={handleChange} />
         </Form.Field>
       </FormInputWrap>
     );

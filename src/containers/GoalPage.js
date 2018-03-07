@@ -14,10 +14,12 @@ class GoalPage extends Component {
   render() {
     const { gid } = this.props.match.params;
     const title = (gid) ? '목표 편집' : '새로운 목표';
-    // const goBack = this.props.history.goBack();
+    const leftFunc = () => {
+      this.props.history.goBack();
+    };
     return (
       <Wrapper>
-        <Header title={title} leftLabel="뒤로" {...this.props} />
+        <Header title={title} leftLabel="뒤로" leftFunc={leftFunc} />)
         <GoalMakeFormContainer {...this.props} />
       </Wrapper>
     );

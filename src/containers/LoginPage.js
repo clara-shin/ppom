@@ -13,7 +13,7 @@ export default class LoginPage extends Component {
   render() {
     return (
       <Wrapper>
-        <Header leftLabel="" leftTo="/" title="ppom" rightLabel="" rightTo="/" />
+        <Header title="ppom" />
         <LoginScreenContainer />
       </Wrapper>
     );

@@ -5,6 +5,8 @@ import {
   Segment,
   Grid,
   Header,
+  Dimmer,
+  Loader,
 } from 'semantic-ui-react';
 import styled from 'styled-components';
 
@@ -18,6 +20,7 @@ export default class LoginScreen extends Component {
   static defaultProps = {
     onGoogleLogin: () => { },
     onLoginComplete: () => { },
+    loading: false,
   }
 
   componentWillMount() {
@@ -29,6 +32,13 @@ export default class LoginScreen extends Component {
   }
 
   render() {
+    if (this.props.loading) {
+      return (
+        <Dimmer active={this.props.loading}>
+          <Loader>Loading</Loader>
+        </Dimmer>
+      );
+    }
     return (
       <FullHeightGrid centered verticalAlign="middle">
         <Grid.Column style={{ width: '320px' }}>

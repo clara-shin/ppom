@@ -2,12 +2,19 @@ import * as firebase from 'firebase';
 
 export const CREATING = 'goal/CREATING';
 export const SUCCESS = 'goal/SUCCESS';
+export const REMOVE = 'goal/REMOVE';
 export const ERROR = 'goal/ERROR';
 export const UPDATEPRESET = 'goal/UPDATEPRESET';
 
 export function goalCreating() {
   return {
     type: CREATING,
+  };
+}
+
+export function goalRemoveSuccess() {
+  return {
+    type: REMOVE,
   };
 }
 
@@ -35,6 +42,7 @@ export function goalError(errorMsg) {
 const initialState = {
   creating: false,
   success: false,
+  removeSuccess: false,
   errorMsg: '',
   checkingItem: '',
   goalDetail: null,
@@ -44,35 +52,32 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case CREATING:
       return {
+        ...state,
         creating: true,
-        success: false,
-        errorMsg: '',
-        checkingItem: '',
-        goalDetail: null,
       };
     case SUCCESS:
       return {
+        ...state,
         creating: false,
         success: true,
         errorMsg: '',
         checkingItem: '',
-        goalDetail: null,
       };
     case UPDATEPRESET:
       return {
-        creating: false,
-        success: false,
-        errorMsg: '',
-        checkingItem: '',
+        ...state,
         goalDetail: action.goalDetail,
       };
     case ERROR:
       return {
-        creating: false,
-        success: false,
+        ...state,
         errorMsg: action.errorMsg,
         checkingItem: '',
-        goalDetail: null,
+      };
+    case REMOVE:
+      return {
+        ...state,
+        removeSuccess: true,
       };
     default:
       return state;
@@ -123,12 +128,19 @@ export const createGoal = ({
 
 
 export const fetchGoal = ({ gid }) => async (dispatch) => {
-  // firebase.auth()를 가져오지 못하는 문제있음
   const { currentUser } = firebase.auth();
   if (currentUser && gid) {
     const snapshot = await firebase.database().ref(`goals/${currentUser.uid}/${gid}`).once('value');
     const obj = Object.assign(snapshot.val(), { gid });
     dispatch(goalUpdatePreset(obj));
+  }
+};
+
+export const deleteGoal = ({ gid }) => async (dispatch) => {
+  const { currentUser } = firebase.auth();
+  if (currentUser && gid) {
+    await firebase.database().ref(`goals/${currentUser.uid}/${gid}`).remove();
+    dispatch(goalRemoveSuccess());
   }
 };
 
