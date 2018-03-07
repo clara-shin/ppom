@@ -166,7 +166,7 @@ i.icon{
 /* 목표설정 제대로 입력 시 저장버튼 활성화 .active 클래스 추가 */
 .ui.button.btn-submit.active{
   color:#fff;
-  background-color:#556bb3;
+  background-color:#f03e3e;
 }
 
 .ui.message .header:not(.ui){
