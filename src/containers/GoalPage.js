@@ -19,7 +19,7 @@ class GoalPage extends Component {
     };
     return (
       <Wrapper>
-        <Header title={title} leftLabel="뒤로" leftFunc={leftFunc} />)
+        <Header title={title} leftLabel="뒤로" leftFunc={leftFunc} />
         <GoalMakeFormContainer {...this.props} />
       </Wrapper>
     );
