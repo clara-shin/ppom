@@ -79,6 +79,14 @@ const TimerButton = styled.button`
   color: #fff;
 `;
 const stampStyle = { width: '50px', height: '54px', margin: '5px' };
+const stampLabelStyle = {
+  fontSize: '2rem',
+  fontWight: 'normal',
+  color: '#fff',
+  position: 'absolute',
+  marginTop: '20px',
+  marginLeft: '10px',
+};
 
 function formatTime(time) {
   if (!time) return '';
@@ -135,14 +143,14 @@ export default class Timer extends Component {
                 <SetTimer> {formatTime((ppomtime * 60) - elapsedTime)}</SetTimer>
                 <CurrStampWrap>
                   {
-                    [...Array((ppomTimes > 5) ? 5 : ppomTimes)].map((e, i) => (
-                      <img src={stampOn} alt={`${i}ppom`} key={i} style={stampStyle} />
+                    [...Array((ppomTimes > 5) ? 1 : ppomTimes)].map((e, i) => (
+                      <img src={stampOn} alt={(ppomTimes > 5) ? `${ppomTimes}ppom` : `${i + 1}ppom`} key={i} style={stampStyle} />
                     ))
                   }
                   {(ppomTimes < 5) && (
                     <img src={stampOff} alt="현재뽐" style={stampStyle} />)}
                   {(ppomTimes > 5) && (
-                    <span>x {ppomTimes}</span>
+                    <span style={stampLabelStyle}>x {ppomTimes}</span>
                   )}
                 </CurrStampWrap>
                 <TimerButtonWrap>
@@ -158,7 +166,7 @@ export default class Timer extends Component {
           )}
           {(timerType !== 'PPOM_TIMER') && (
             <Wrap>
-              <Header title={isBreakTimer?'휴식 시간':'긴 휴식 시간'} leftLabel="뒤로" leftFunc={leftFunc} theme="white" />
+              <Header title={isBreakTimer ? '휴식 시간' : '긴 휴식 시간'} leftLabel="뒤로" leftFunc={leftFunc} theme="white" />
               <TimerWrap>
                 <TimerTitle>{quote}</TimerTitle>
                 <SetTimer>
