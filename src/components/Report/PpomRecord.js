@@ -8,6 +8,7 @@ const Wrap = styled.div`
 const RecordWrap = styled.div`
   display: flex;
   justify-content:flex-start;
+  align-items:center;
 
   width:100%;
   height:100%;
@@ -38,16 +39,17 @@ const PpomCount = styled.div`
   justify-content: flex-end;
   width: 30%;
   font-weight:bold;
+  font-style:italic;
   vertical-align: baseline;
   text-align: right;
   letter-spacing:-0.5px;
 `;
 
 const PpomNum = styled.strong`
-  font-size: 1.8em;
+  font-size: 2.5em;
   text-align: center;
-  padding-right: 5px;
   color: #f03e3e;
+  font-style: normal;
 `;
 const GoalTitle = styled.div`
   width: 70%;
@@ -63,6 +65,8 @@ const GoalTitle = styled.div`
 
 const CheerUpMessage = styled.div`
   text-align:right;
+  font-weight:700;
+  padding-top:10px;
 `;
 export default class PpomRecord extends Component {
   render() {
