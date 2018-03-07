@@ -122,7 +122,6 @@ const getDayAchieves = async (date) => {
     });
     details.sort((a, b) => b.pomo - a.pomo);
   }
-  console.log(details);
   return details;
 };
 
