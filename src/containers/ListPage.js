@@ -24,7 +24,7 @@ class ListPage extends Component {
     const { isEditList } = this.state;
     return (
       <Wrapper>
-        <Header leftLabel="추가" leftTo="/make-goal" title="목표" rightLabel="기록" rightTo="/" />
+        <Header leftLabel="추가" leftTo="/make-goal" title="목표" rightLabel="기록" rightTo="/report" />
         <GoalListContainer isEditList={isEditList} />
         <FloatingNav onClickEdit={this.onEditGoals} />
       </Wrapper>
