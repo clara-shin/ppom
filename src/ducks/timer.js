@@ -13,10 +13,11 @@ export const END_TIMER = 'END_TIMER';
 
 export const ADD_SECOND = 'ADD_SECOND';
 
-export function presetTimer(timerDetail) {
+export function presetTimer(timerDetail, pomo) {
   return {
     type: PRESET_TIMER,
     timerDetail,
+    ppomTimes: pomo,
   };
 }
 
@@ -62,9 +63,10 @@ export function endTimer() {
   };
 }
 
-export function addSecond() {
+export function addSecond(tid) {
   return {
     type: ADD_SECOND,
+    tid,
   };
 }
 
@@ -74,6 +76,7 @@ const initialState = {
   elapsedTime: 0,
   ppomTimes: 0,
   timerDetail: {},
+  tid: '',
 };
 
 function isLongBreakTime(ppomtimes, frqncy) {
@@ -95,12 +98,21 @@ function setBreakTimer(state, type) {
     timerDetail: state.timerDetail,
   };
 }
+
+function getTodayDate() {
+  const date = new Date(); // Or the date you'd like converted.
+  const today = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
+  return today.toISOString().split('T')[0];
+}
+
 export default function (state = initialState, action) {
   switch (action.type) {
     case PRESET_TIMER:
       return {
         ...state,
+        timerType: PPOM_TIMER,
         timerDetail: action.timerDetail,
+        ppomTimes: action.ppomTimes,
       };
     case START_TIMER:
       return {
@@ -117,6 +129,7 @@ export default function (state = initialState, action) {
         ...state,
         isPlaying: false,
         elapsedTime: 0,
+        tid: '',
       };
     case BREAK_TIMER:
       return setBreakTimer(state, action.type);
@@ -131,11 +144,14 @@ export default function (state = initialState, action) {
       };
     case END_TIMER:
       return {
-
+        ...state,
+        isPlaying: false,
+        tid: '',
       };
     case ADD_SECOND:
       return {
         ...state,
+        tid: action.tid,
         elapsedTime: state.elapsedTime + 1,
       };
     default:
@@ -146,51 +162,80 @@ export default function (state = initialState, action) {
 export const fetchTimerInfo = ({ gid }) => async (dispatch) => {
   const { currentUser } = firebase.auth();
   if (currentUser && gid) {
-    const snapshot = await firebase.database().ref(`goals/${currentUser.uid}/${gid}`).once('value');
-    const obj = Object.assign(snapshot.val(), { gid });
-    dispatch(presetTimer(obj));
+    const goalsSnap = firebase.database().ref(`goals/${currentUser.uid}/${gid}`).once('value');
+    const achieveSnap = firebase.database().ref(`achieves/${currentUser.uid}/${gid}/${getTodayDate()}`).once('value');
+    const snapArr = await Promise.all([goalsSnap, achieveSnap]);
+    const goalObj = snapArr[0].val();
+    const achieveObj = snapArr[1].val();
+    const obj = Object.assign(goalObj, { gid });
+    const pomo = (achieveObj && 'pomo' in achieveObj) ? achieveObj.pomo : 0;
+    dispatch(presetTimer(obj, pomo));
   }
 };
 
-export const applyAddSecond = () => async (dispatch, getState) => {
+export const applyAddSecond = timerInterval => async (dispatch, getState) => {
   const {
     elapsedTime, timerDetail, timerType, ppomTimes,
   } = getState().timer;
   const {
     gid, goal, ppomtime,
   } = timerDetail;
-  // if (elapsedTime < timerDetail.ppomtime * 60) {
-  if (elapsedTime < 10) {
-    dispatch(addSecond());
-  } else if (timerType === PPOM_TIMER) {
-    const { currentUser } = firebase.auth();
-    if (!currentUser) {
-      return;
-    }
-    const today = new Date(Date.now());
-    const todayDate = today.toISOString().split('T')[0];
-    const ref = `achieves/${currentUser.uid}/${gid}/${todayDate}`;
-    const snapshot = await firebase.database().ref(ref).once('value');
-    const achieve = snapshot.val();
-    if (achieve) {
-      achieve.pomo += 1;
-      achieve.time += parseInt(ppomtime, 10);
-      achieve.updatedAt = firebase.database.ServerValue.TIMESTAMP;
-      await firebase.database().ref(ref).update(achieve);
-    } else {
-      await firebase.database().ref(ref).update({
-        goal,
-        time: parseInt(ppomtime, 10),
-        pomo: 1,
-        updatedAt: firebase.database.ServerValue.TIMESTAMP,
-      });
-    }
-    if (isLongBreakTime(ppomTimes + 1, timerDetail.longbreakfrqncy)) {
-      dispatch(longBreakTimer());
-    } else {
-      dispatch(breakTimer());
-    }
+  // if (elapsedTime < ppomtime * 60) {
+  if (elapsedTime < 5) {
+    dispatch(addSecond(timerInterval));
   } else {
-    dispatch(ppomTimer());
+    clearInterval(timerInterval);
+    if (timerType === PPOM_TIMER) {
+      const { currentUser } = firebase.auth();
+      if (!currentUser) {
+        return;
+      }
+      const ref = `achieves/${currentUser.uid}/${gid}/${getTodayDate()}`;
+      const snapshot = await firebase.database().ref(ref).once('value');
+      const achieve = snapshot.val();
+      if (achieve) {
+        achieve.pomo += 1;
+        achieve.time += parseInt(ppomtime, 10);
+        achieve.updatedAt = firebase.database.ServerValue.TIMESTAMP;
+        await firebase.database().ref(ref).update(achieve);
+      } else {
+        await firebase.database().ref(ref).update({
+          goal,
+          time: parseInt(ppomtime, 10),
+          pomo: 1,
+          updatedAt: firebase.database.ServerValue.TIMESTAMP,
+        });
+      }
+      if (isLongBreakTime(ppomTimes + 1, timerDetail.longbreakfrqncy)) {
+        dispatch(longBreakTimer());
+      } else {
+        dispatch(breakTimer());
+      }
+    } else {
+      dispatch(ppomTimer());
+    }
+  }
+};
+
+export const applyStartTimer = () => async (dispatch, getState) => {
+  await dispatch(startTimer());
+  const { isPlaying } = getState().timer;
+  if (isPlaying) {
+    const timerInterval = setInterval(
+      () => {
+        dispatch(applyAddSecond(timerInterval));
+      },
+      1000,
+    );
+  }
+};
+
+export const applyPauseOrRestartTimer = isPause => (dispatch, getState) => {
+  const { tid } = getState().timer;
+  clearInterval(tid);
+  if (isPause) {
+    dispatch(pauseTimer());
+  } else {
+    dispatch(restartTimer());
   }
 };
