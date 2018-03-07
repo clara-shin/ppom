@@ -72,7 +72,7 @@ export default class GoalList extends Component {
   render() {
     const { goals, isEditList } = this.props;
     const goalWrapClassName = (isEditList) ? 'icon icon-right-open' : 'icon';
-    const linkTo = (isEditList) ? 'edit-goal/' : 'timer/';
+    const linkTo = (isEditList) ? '/edit-goal/' : '/timer/';
     return (
       <GoalListWrap>{
         goals.map(({ gid, ...goal }) => (
