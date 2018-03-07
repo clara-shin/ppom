@@ -34,7 +34,6 @@ class ListPage extends Component {
 
     return (
       <Wrapper>
-        <Header leftLabel="추가" leftTo="/make-goal" title="목표" rightLabel="기록" rightTo="/" />
         {
           isEditList && (
             <Header title="목표 편집" leftLabel="뒤로" leftFunc={backFunc} />
