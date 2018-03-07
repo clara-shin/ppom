@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled, { ThemeProvider } from 'styled-components';
+// import { Link } from 'react-router-dom';
 
 export const Wrap = styled.header`
   display:flex;
   min-height:56px;
   justify-content: space-between;
   align-items: center;
-  background-color: #f03e3e;
-  color:#181818;
   padding:10px;
+  color: ${props => props.theme.color};
+  background-color: ${props => props.theme.bg};
+  background-alpha: .5;
 `;
 
 export const Button = styled.button`
@@ -18,7 +19,7 @@ export const Button = styled.button`
   padding:0;
   cursor:pointer;
 `;
-// export const Link = Button.withComponent('a');
+export const Link = Button.withComponent('a');
 
 const HeaderLink = styled(Link)`
   display:block;
@@ -26,12 +27,12 @@ const HeaderLink = styled(Link)`
   padding:10px;
   font-size: 16px;
   border-radius: 2px;
-  color: #fff;
+  color: ${props => props.theme.color};
   &:link, &:visited {
-    color: #fff;
+    color: ${props => props.theme.link};
   }
   &:hover, &:focus, &:active {
-    color: #fff;
+    color: ${props => props.theme.link};
   }
 `;
 
@@ -40,45 +41,53 @@ export const Title = styled.h1`
   padding:0;
   font-weight:normal;
   font-size: 20px;
-  color:#fff;
+  color: ${props => props.theme.color};
 `;
 
-export default class Header extends Component {
-  state = {
-    leftTo: '',
-    leftLabel: '',
-    title: '',
-    rightTo: '',
-    rightLabel: '',
-  };
+HeaderLink.defaultProps = {
+  theme: {
+    color: '#fff',
+    link: '#fff',
+  },
+};
 
-  handleClick = () => {
-    if (!this.props.leftTo) {
-      this.props.history.goBack();
-    }
-  }
+Wrap.defaultProps = {
+  theme: {
+    color: '#fff',
+    bg: '#f03e3e',
+  },
+};
+
+
+export default class Header extends Component {
   render() {
-    const tempProps = {};
-    Object.assign(tempProps, this.state);
-    Object.entries(this.props).forEach(([key, value]) => {
-      tempProps[key] = value;
-    });
-    const {
-      leftTo,
-      leftLabel,
-      title,
-      rightTo,
-      rightLabel,
-    } = tempProps;
+    const { title } = this.props;
+    const hasLeft = ('leftLabel' in this.props);
+    const hasRight = ('rightLabel' in this.props);
+    const theme = ('theme' in this.props && this.props.theme === 'white')
+      ? {
+        bg: '#ffffff30',
+        color: '#fff',
+        link: '#fff',
+      }
+      : {
+        bg: '#f03e3e',
+        color: '#fff',
+        link: '#fff',
+      };
 
     return (
-      <Wrap>
-        <HeaderLink to={leftTo} onClick={this.handleClick}>
-          {leftLabel}
-        </HeaderLink>
-        <Title>{title}</Title>
-        <HeaderLink to={rightTo}>{rightLabel}</HeaderLink>
-      </Wrap>
+      <ThemeProvider theme={theme}>
+        <Wrap>
+          <HeaderLink onClick={(hasLeft) ? this.props.leftFunc : () => {}}>
+            {(hasLeft) ? this.props.leftLabel : ''}
+          </HeaderLink>
+          <Title>{title}</Title>
+          <HeaderLink onClick={(hasRight) ? this.props.rightFunc : () => {}}>
+            {(hasRight) ? this.props.rightLabel : ''}
+          </HeaderLink>
+        </Wrap>
+      </ThemeProvider>
     );
   }
 }

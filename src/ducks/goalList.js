@@ -39,9 +39,10 @@ export default function (state = initialState, action) {
 }
 
 const getTodayDate = () => {
-  const today = new Date(Date.now());
+  const date = new Date(); // Or the date you'd like converted.
+  const today = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
   return {
-    date: '2018-02-13', // today.toISOString().split('T')[0],
+    date: today.toISOString().split('T')[0],
     startAt: today.setHours(0, 0, 0, 0) - 1,
     endAt: today.setHours(23, 59, 59, 59) + 1,
   };
@@ -65,14 +66,12 @@ export const fetchGoalList = () => async (dispatch) => {
   dispatch(goalListLoading());
   // 목표 목록 로드하는 부분
   const { currentUser } = firebase.auth();
-  const todayObj = getTodayDate();
   const numOfLimit = 7;
   const goalsRef = firebase.database().ref(`goals/${currentUser.uid}`);
   const goalsSnap = goalsRef.orderByChild('updatedAt').limitToLast(numOfLimit).once('value');
   const achievesRef = firebase.database().ref(`achieves/${currentUser.uid}`);
-  const achieveSnap = achievesRef.orderByChild(`${todayObj.date}`).once('value');
+  const achieveSnap = achievesRef.orderByChild('updatedAt').once('value');
   const snapArr = await Promise.all([goalsSnap, achieveSnap]);
-
   const goalObj = snapArr[0].val();
   const achieveObj = snapArr[1].val();
   if (goalObj && achieveObj) {
@@ -84,7 +83,5 @@ export const fetchGoalList = () => async (dispatch) => {
       }
     ));
     dispatch(goalListSuccess(goals));
-  } else {
-    console.log('데이터 없음');
   }
 };
