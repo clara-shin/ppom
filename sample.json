@@ -1,78 +1,71 @@
 {
-  "users": {
-    "dY7lr0Mbm2b1nkyRWxEboxwuaGl1": {
-      "name": "이름", 
-      "userEmail": "xxx@gmail.com",
-      "photoURL": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=64"
-    }
-  },
   "goals": {
-    "dY7lr0Mbm2b1nkyRWxEboxwuaGl1":{
+    "dY7lr0Mbm2b1nkyRWxEboxwuaGl1": {
       "goal0": {
-        "goal": "goal1",
-        "ppomtime": 25,
-        "breaktime": 5,
-        "longbreaktime": 20,
-        "longbreakfrqncy": 4,
+        "goal": "아침 조깅",
+        "ppomtime": 10,
+        "breaktime": 3,
+        "longbreaktime": 10,
+        "longbreakfrqncy": 3,
         "createdAt": 1517324400000,
         "updatedAt": 1518533999058
       },
       "goal1": {
-        "goal": "goal2",
-        "ppomtime": 25,
+        "goal": "문학도서 읽기",
+        "ppomtime": 20,
         "breaktime": 5,
-        "longbreaktime": 20,
-        "longbreakfrqncy": 4,
+        "longbreaktime": 10,
+        "longbreakfrqncy": 3,
         "createdAt": 1517325400000,
         "updatedAt": 1518447600001
       },
       "goal2": {
-        "goal": "goal3",
-        "ppomtime": 25,
+        "goal": "영문리딩 연습",
+        "ppomtime": 15,
         "breaktime": 5,
-        "longbreaktime": 20,
+        "longbreaktime": 10,
         "longbreakfrqncy": 4,
         "createdAt": 1517326400000,
         "updatedAt": 1518493806744
       },
       "goal3": {
-        "goal": "goal4",
-        "ppomtime": 25,
-        "breaktime": 5,
-        "longbreaktime": 20,
+        "goal": "면접 말하기 연습",
+        "ppomtime": 5,
+        "breaktime": 1,
+        "longbreaktime": 5,
         "longbreakfrqncy": 4,
         "createdAt": 1517327400000,
         "updatedAt": 1518493756910
       },
       "goal4": {
-        "goal": "goal5",
-        "ppomtime": 25,
+        "goal": "IELTS Writing test",
+        "ppomtime": 45,
         "breaktime": 5,
         "longbreaktime": 20,
-        "longbreakfrqncy": 4,
+        "longbreakfrqncy": 2,
         "createdAt": 1517328400000,
         "updatedAt": 1518493799711
       },
       "goal5": {
-        "goal": "goal6",
-        "ppomtime": 25,
+        "goal": "면접 말하기 연습",
+        "ppomtime": 1,
         "breaktime": 5,
-        "longbreaktime": 20,
-        "longbreakfrqncy": 4,
+        "longbreaktime": 10,
+        "longbreakfrqncy": 5,
         "createdAt": 1517329400000,
         "updatedAt": 1518493766057
       },
       "goal6": {
-        "goal": "goal7",
-        "ppomtime": 25,
-        "breaktime": 5,
-        "longbreaktime": 20,
-        "longbreakfrqncy": 4,
+        "goal": "크로스핏 인터벌 동작",
+        "ppomtime": 4,
+        "breaktime": 1,
+        "longbreaktime": 10,
+        "longbreakfrqncy": 3,
         "createdAt": 1517330400000,
         "updatedAt": 1518493793388
       },
       "goal7": {
-        "goal": "goal8",
+        "goal": "업무집중시간",
         "ppomtime": 25,
         "breaktime": 5,
         "longbreaktime": 20,
@@ -81,19 +74,19 @@
         "updatedAt": 1518493772664
       },
       "goal8": {
-        "goal": "goal9",
-        "ppomtime": 25,
-        "breaktime": 5,
+        "goal": "영어문장 독해문제 10문제씩 풀기연습",
+        "ppomtime": 3,
+        "breaktime": 2,
         "longbreaktime": 20,
-        "longbreakfrqncy": 4,
+        "longbreakfrqncy": 10,
         "createdAt": 1517332400000,
         "updatedAt": 1518493785622
       },
       "goal9": {
-        "goal": "goal10",
-        "ppomtime": 25,
-        "breaktime": 5,
-        "longbreaktime": 20,
+        "goal": "플랭크 7분하기",
+        "ppomtime": 1,
+        "breaktime": 1,
+        "longbreaktime": 10,
         "longbreakfrqncy": 4,
         "createdAt": 1517333400000,
         "updatedAt": 1518493779267
@@ -101,85 +94,385 @@
     }
   },
   "achieves": {
-    "dY7lr0Mbm2b1nkyRWxEboxwuaGl1":{
+    "dY7lr0Mbm2b1nkyRWxEboxwuaGl1": {
       "goal0": {
-        "2018-02-13":{
-          "goal": "goal title1",
-          "time": 100,
+        "2018-03-01": {
+          "goal": "아침 조깅",
+          "time": 30,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-02": {
+          "goal": "아침 조깅",
+          "time": 30,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-03": {
+          "goal": "아침 조깅",
+          "time": 30,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-04": {
+          "goal": "아침 조깅",
+          "time": 30,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-05": {
+          "goal": "아침 조깅",
+          "time": 30,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-06": {
+          "goal": "아침 조깅",
+          "time": 30,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-07": {
+          "goal": "아침 조깅",
+          "time": 30,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-08": {
+          "goal": "아침 조깅",
+          "time": 30,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        }
+      },
+      "goal1": {
+        "2018-03-01": {
+          "goal": "문학도서 읽기",
+          "time": 20,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-02": {
+          "goal": "문학도서 읽기",
+          "time": 40,
+          "pomo": 2,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-03": {
+          "goal": "문학도서 읽기",
+          "time": 20,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-04": {
+          "goal": "문학도서 읽기",
+          "time": 60,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-05": {
+          "goal": "문학도서 읽기",
+          "time": 20,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-06": {
+          "goal": "문학도서 읽기",
+          "time": 20,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-07": {
+          "goal": "문학도서 읽기",
+          "time": 40,
+          "pomo": 2,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-08": {
+          "goal": "문학도서 읽기",
+          "time": 20,
           "pomo": 1,
           "updatedAt": 1518533999058
         }
       },
       "goal2": {
-        "2018-02-13": {
-          "goal": "goal title3",
-          "time": 100,
-          "pomo": 3,
-          "updatedAt": 1518493806744
-        }
-      },
-      "goal4": {
-        "2018-02-13": {
-          "goal": "goal title5",
-          "time": 100,
-          "pomo": 5,
-          "updatedAt": 1518493799711
-        }
-      },
-      "goal6": {
-        "2018-02-13": {
-          "goal": "goal title7",
-          "time": 100,
-          "pomo": 7,
-          "updatedAt": 1518493793388
-        }
-      },
-      "goal8": {
-        "2018-02-13": {
-          "goal": "goal title9",
-          "time": 100,
-          "pomo": 9,
-          "updatedAt": 1518493785622
-        }
-      },
-      "goal9": {
-        "2018-02-13": {
-          "goal": "goal title10",
-          "time": 100,
-          "pomo": 10,
-          "updatedAt": 1518493779267
-        }
-      },
-      "goal7": {
-        "2018-02-13": {
-          "goal": "goal title8",
-          "time": 100,
-          "pomo": 8,
-          "updatedAt": 1518493772664
-        }
-      },
-      "goal5": {
-        "2018-02-13": {
-          "goal": "goal title6",
-          "time": 100,
-          "pomo": 6,
-          "updatedAt": 1518493766057
+        "2018-03-01": {
+          "goal": "영문리딩 연습",
+          "time": 15,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-02": {
+          "goal": "영문리딩 연습",
+          "time": 15,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-03": {
+          "goal": "영문리딩 연습",
+          "time": 15,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-04": {
+          "goal": "영문리딩 연습",
+          "time": 15,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-05": {
+          "goal": "영문리딩 연습",
+          "time": 30,
+          "pomo": 2,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-06": {
+          "goal": "영문리딩 연습",
+          "time": 30,
+          "pomo": 2,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-07": {
+          "goal": "영문리딩 연습",
+          "time": 15,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-08": {
+          "goal": "영문리딩 연습",
+          "time": 15,
+          "pomo": 1,
+          "updatedAt": 1518533999058
         }
       },
       "goal3": {
-        "2018-02-13": {
-          "goal": "goal title4",
-          "time": 100,
+        "2018-03-01": {
+          "goal": "토익스피킹 연습",
+          "time": 5,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-02": {
+          "goal": "토익스피킹 연습",
+          "time": 5,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-03": {
+          "goal": "토익스피킹 연습",
+          "time": 5,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-04": {
+          "goal": "토익스피킹 연습",
+          "time": 5,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-05": {
+          "goal": "토익스피킹 연습",
+          "time": 30,
+          "pomo": 6,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-06": {
+          "goal": "토익스피킹 연습",
+          "time": 15,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-07": {
+          "goal": "토익스피킹 연습",
+          "time": 20,
           "pomo": 4,
-          "updatedAt": 1518493756910
+          "updatedAt": 1518533999058
+        },
+        "2018-03-08": {
+          "goal": "토익스피킹 연습",
+          "time": 15,
+          "pomo": 3,
+          "updatedAt": 1518533999058
         }
       },
-      "goal1": {
-        "2018-02-13": {
-          "goal": "goal title2",
-          "time": 100,
-          "pomo": 2,
-          "updatedAt": 1518447600001
+      "goal4": {
+        "2018-03-02": {
+          "goal": "IELTS Writing test",
+          "time": 45,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-05": {
+          "goal": "IELTS Writing test",
+          "time": 45,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-07": {
+          "goal": "IELTS Writing test",
+          "time": 45,
+          "pomo": 1,
+          "updatedAt": 1518533999058
+        }
+      },
+      "goal5": {
+        "2018-03-01": {
+          "goal": "면접 말하기 연습",
+          "time": 5,
+          "pomo": 5,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-02": {
+          "goal": "면접 말하기 연습",
+          "time": 5,
+          "pomo": 5,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-04": {
+          "goal": "면접 말하기 연습",
+          "time": 5,
+          "pomo": 5,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-05": {
+          "goal": "면접 말하기 연습",
+          "time": 5,
+          "pomo": 5,
+          "updatedAt": 1518533999058
+        }
+      },
+      "goal6": {
+        "2018-03-01": {
+          "goal": "크로스핏 인터벌 동작",
+          "time": 12,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-02": {
+          "goal": "크로스핏 인터벌 동작",
+          "time": 12,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-05": {
+          "goal": "크로스핏 인터벌 동작",
+          "time": 12,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-06": {
+          "goal": "크로스핏 인터벌 동작",
+          "time": 12,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-07": {
+          "goal": "크로스핏 인터벌 동작",
+          "time": 12,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-08": {
+          "goal": "크로스핏 인터벌 동작",
+          "time": 12,
+          "pomo": 3,
+          "updatedAt": 1518533999058
+        }
+      },
+      "goal7": {
+        "2018-03-02": {
+          "goal": "업무집중시간",
+          "time": 300,
+          "pomo": 12,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-05": {
+          "goal": "업무집중시간",
+          "time": 325,
+          "pomo": 13,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-06": {
+          "goal": "업무집중시간",
+          "time": 325,
+          "pomo": 13,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-07": {
+          "goal": "업무집중시간",
+          "time": 300,
+          "pomo": 12,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-08": {
+          "goal": "업무집중시간",
+          "time": 325,
+          "pomo": 13,
+          "updatedAt": 1518533999058
+        }
+      },
+      "goal8": {
+        "2018-03-03": {
+          "goal": "영어문장 독해문제 10문제씩 풀기연습",
+          "time": 30,
+          "pomo": 10,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-04": {
+          "goal": "영어문장 독해문제 10문제씩 풀기연습",
+          "time": 30,
+          "pomo": 10,
+          "updatedAt": 1518533999058
+        }
+      },
+      "goal9": {
+        "2018-03-01": {
+          "goal": "플랭크 7분하기",
+          "time": 7,
+          "pomo": 7,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-02": {
+          "goal": "플랭크 7분하기",
+          "time": 7,
+          "pomo": 7,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-03": {
+          "goal": "플랭크 7분하기",
+          "time": 7,
+          "pomo": 7,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-04": {
+          "goal": "플랭크 7분하기",
+          "time": 7,
+          "pomo": 7,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-05": {
+          "goal": "플랭크 7분하기",
+          "time": 7,
+          "pomo": 7,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-06": {
+          "goal": "플랭크 7분하기",
+          "time": 7,
+          "pomo": 7,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-07": {
+          "goal": "플랭크 7분하기",
+          "time": 7,
+          "pomo": 7,
+          "updatedAt": 1518533999058
+        },
+        "2018-03-08": {
+          "goal": "플랭크 7분하기",
+          "time": 7,
+          "pomo": 7,
+          "updatedAt": 1518533999058
         }
       }
     }
