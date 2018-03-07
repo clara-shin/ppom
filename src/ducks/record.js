@@ -1,7 +1,6 @@
 import * as firebase from 'firebase';
 import * as moment from 'moment';
 
-
 export const LOADING = 'record/LOADING';
 export const SUCCESS = 'record/SUCCESS';
 export const USERINFO_SUCCESS = 'record/USERINFO_SUCCESS';
@@ -41,12 +40,13 @@ export function userInfoSuccess(userInfo) {
   };
 }
 
-const ko = moment();
+const mm = moment();
+const DATE_FORMAT = 'YYYY-MM-DD';
 const initialState = {
   loading: false,
   details: [],
   userInfo: {},
-  dateInfo: ko.format('YYYY-MM-DD'),
+  dateInfo: mm.format(DATE_FORMAT),
   activeItem: 'day',
 };
 
@@ -174,7 +174,7 @@ const getWeekAchieves = async (weekArr, startOfWeek, endOfWeek) => {
   return { data: weekArr, keys: uniqueKeys, achieves };
 };
 
-export const fetchRecordInit = (date = ko.format('YYYY-MM-DD')) => async (dispatch) => {
+export const fetchRecordInit = (date = mm.format(DATE_FORMAT)) => async (dispatch) => {
   dispatch(recordLoading());
   // 목표 목록 로드하는 부분
   const { currentUser } = firebase.auth();
@@ -193,21 +193,21 @@ export const handleDateClick = dayIdx => async (dispatch, getState) => {
   let date;
   if (activeItem === 'day') {
     date = moment(dateInfo);
-    if (dayIdx > 0 && moment(dateInfo).isSame(ko.format('YYYY-MM-DD'))) {
+    if (dayIdx > 0 && moment(dateInfo).isSame(mm.format(DATE_FORMAT))) {
       return;
     }
-    date = date.add(dayIdx, 'days').format('YYYY-MM-DD');
+    date = date.add(dayIdx, 'days').format(DATE_FORMAT);
     dispatch(recordDateSet(date));
     dispatch(recordLoading());
     details = await getDayAchieves(date);
   } else {
     const startDate = moment(dateInfo.split(' ~ ')[0]);
     const endDate = moment(dateInfo.split(' ~ ')[1]);
-    if (dayIdx > 0 && moment(ko).isBetween(startDate, endDate, null, '[]')) { return; }
+    if (dayIdx > 0 && moment(mm).isBetween(startDate, endDate, null, '[]')) { return; }
     date = (dayIdx > 0) ? moment(endDate) : moment(startDate);
     let weekArr = [];
     for (let i = 0; i < 7; i += 1) {
-      weekArr.unshift({ name: date.add(dayIdx, 'days').format('YYYY-MM-DD') });
+      weekArr.unshift({ name: date.add(dayIdx, 'days').format(DATE_FORMAT) });
     }
     if (dayIdx > 0) {
       weekArr = weekArr.reverse();
@@ -224,22 +224,22 @@ export const handleDateClick = dayIdx => async (dispatch, getState) => {
 
 export const handleItemClick = item => async (dispatch) => {
   dispatch(recordItemSet(item));
-  const today = ko.format('YYYY-MM-DD');
+  const today = mm.format(DATE_FORMAT);
   let details;
   if (item === 'day') {
     dispatch(recordDateSet(today));
     dispatch(recordLoading());
-    details = await getDayAchieves(ko.format('YYYY-MM-DD'));
+    details = await getDayAchieves(mm.format(DATE_FORMAT));
   } else if (item === 'week') {
     const weekArr = [];
-    const startOfWeek = moment().subtract(ko.days(), 'days').format('YYYY-MM-DD');
-    const endOfWeek = moment().add(6 - ko.days(), 'days').format('YYYY-MM-DD');
+    const startOfWeek = moment().subtract(mm.days(), 'days').format(DATE_FORMAT);
+    const endOfWeek = moment().add(6 - mm.days(), 'days').format(DATE_FORMAT);
     const thisWeek = `${startOfWeek} ~ ${endOfWeek}`;
     for (let i = 0; i < 7; i += 1) {
-      if (i < ko.days()) {
-        weekArr.push({ name: moment().subtract(ko.days() - i, 'days').format('YYYY-MM-DD') });
+      if (i < mm.days()) {
+        weekArr.push({ name: moment().subtract(mm.days() - i, 'days').format(DATE_FORMAT) });
       } else {
-        weekArr.push({ name: moment().add(i - ko.days(), 'days').format('YYYY-MM-DD') });
+        weekArr.push({ name: moment().add(i - mm.days(), 'days').format(DATE_FORMAT) });
       }
     }
     dispatch(recordDateSet(thisWeek));
