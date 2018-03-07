@@ -6,12 +6,17 @@ import LoginScreen from '../components/LoginScreen';
 export default class LoginScreenContainer extends Component {
   state = {
     redirectToList: false,
+    loading: false,
   }
 
   completeGoogleLogin = async () => {
-    // 로딩인디케이터
+    this.setState({
+      loading: true,
+    });
     const redirectResult = await firebase.auth().getRedirectResult();
-    // 해제
+    this.setState({
+      loading: false,
+    });
     if (redirectResult.credential) {
       this.setState({
         redirectToList: true,
@@ -25,13 +30,15 @@ export default class LoginScreenContainer extends Component {
   }
 
   render() {
-    if (this.state.redirectToList) {
+    const { redirectToList, loading } = this.state;
+    if (redirectToList) {
       return (
         <Redirect to="/list" />
       );
     }
     return (
       <LoginScreen
+        loading={loading}
         onGoogleLogin={this.handleGoogleLogin}
         onLoginComplete={this.completeGoogleLogin}
       />
