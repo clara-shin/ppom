@@ -105,29 +105,6 @@ function getTheme(type) {
 }
 
 export default class Timer extends Component {
-  // componentWillReceiveProps(nextProps) {
-  //   const currentProps = this.props;
-  //   if (!currentProps.isPlaying && nextProps.isPlaying) {
-  //     const timerInterval = setInterval(() => {
-  //       currentProps.addSecond();
-  //     }, 1000);
-  //     this.setState({
-  //       interval: timerInterval,
-  //     });
-  //   } else if (currentProps.isPlaying && !nextProps.isPlaying) {
-  //     clearInterval(this.state.interval);
-  //   }
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //   const currentProps = this.props;
-  //   if (!currentProps.isPlaying && nextProps.isPlaying) {
-  //     currentProps.addSecond();
-  //   } else {
-  //     console.log(nextProps.elapsedTime);
-  //   }
-  // }
-
   render() {
     const {
       isPlaying,
@@ -142,6 +119,7 @@ export default class Timer extends Component {
     const {
       ppomtime, goal, longbreaktime, breaktime, quote,
     } = timerDetail;
+    const isBreakTimer = (timerType === 'BREAK_TIMER');
     const theme = getTheme(timerType);
     const leftFunc = () => {
       this.props.history.goBack();
@@ -178,29 +156,18 @@ export default class Timer extends Component {
               </TimerWrap>
             </Wrap>
           )}
-          {(timerType === 'BREAK_TIMER') && (
+          {(timerType !== 'PPOM_TIMER') && (
             <Wrap>
-              <Header title="휴식 시간" leftLabel="뒤로" leftFunc={leftFunc} theme="white" />
+              <Header title={isBreakTimer?'휴식 시간':'긴 휴식 시간'} leftLabel="뒤로" leftFunc={leftFunc} theme="white" />
               <TimerWrap>
                 <TimerTitle>{quote}</TimerTitle>
-                <SetTimer> {formatTime((breaktime * 60) - elapsedTime)}</SetTimer>
-                <TimerButtonWrap>
-                  {!isPlaying && (
-                    <TimerButton onClick={startTimer} >시작</TimerButton>
-                  )}
-                  {isPlaying && (
-                    <TimerButton onClick={pauseTimer} >일시정지</TimerButton>
-                  )}
-                </TimerButtonWrap>
-              </TimerWrap>
-            </Wrap>
-          )}
-          {(timerType === 'LONG_BREAK_TIMER') && (
-            <Wrap>
-              <Header title="긴 휴식 시간" leftLabel="뒤로" leftFunc={leftFunc} theme="white" />
-              <TimerWrap>
-                <TimerTitle>{quote}</TimerTitle>
-                <SetTimer> {formatTime((longbreaktime * 60) - elapsedTime)}</SetTimer>
+                <SetTimer>
+                  {
+                    isBreakTimer
+                    ? formatTime((breaktime * 60) - elapsedTime)
+                    : formatTime((longbreaktime * 60) - elapsedTime)
+                  }
+                </SetTimer>
                 <TimerButtonWrap>
                   {!isPlaying && (
                     <TimerButton onClick={startTimer} >시작</TimerButton>
