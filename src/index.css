@@ -58,7 +58,6 @@ i.icon{
   display: initial;
   margin: 0;
 }
-
 .ui.btn.btn-navi{
   padding: 0;
   width: 50px;
@@ -172,6 +171,12 @@ i.icon{
 .ui.message .header:not(.ui){
   font-size:16px;
   font-weight:400;
+}
+/* 탭 활성화 시 보여지는 컨테이너 영역 */
+.ui.segment.active.tab {
+  border: 0 none;
+  box-shadow: none;
+  padding: 0;
 }
 @keyframes spreadUp {
   0% {
