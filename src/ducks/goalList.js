@@ -66,9 +66,9 @@ export const fetchGoalList = () => async (dispatch) => {
   dispatch(goalListLoading());
   // 목표 목록 로드하는 부분
   const { currentUser } = firebase.auth();
-  const numOfLimit = 7;
+  // const numOfLimit = 7;
   const goalsRef = firebase.database().ref(`goals/${currentUser.uid}`);
-  const goalsSnap = goalsRef.orderByChild('updatedAt').limitToLast(numOfLimit).once('value');
+  const goalsSnap = goalsRef.orderByChild('updatedAt').once('value');
   const achievesRef = firebase.database().ref(`achieves/${currentUser.uid}`);
   const achieveSnap = achievesRef.orderByChild('updatedAt').once('value');
   const snapArr = await Promise.all([goalsSnap, achieveSnap]);
@@ -82,6 +82,7 @@ export const fetchGoalList = () => async (dispatch) => {
         pomo: getPomo(achieveObj, gid),
       }
     ));
+    goals.sort((a, b) => b.updatedAt - a.updatedAt);
     dispatch(goalListSuccess(goals));
   }
 };
