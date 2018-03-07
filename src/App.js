@@ -9,6 +9,7 @@ import rootReducer from './ducks';
 import ListPage from './containers/ListPage';
 import GoalPage from './containers/GoalPage';
 import TimerPage from './containers/TimerPage';
+import RecordPage from './containers/RecordPage';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 const Home = withAuth(() => <Redirect to="/list" />);
@@ -25,6 +26,7 @@ class App extends Component {
             <Route path="/make-goal" component={GoalPage} />
             <Route path="/edit-goal/:gid" component={GoalPage} />
             <Route path="/timer/:gid" component={TimerPage} />
+            <Route path="/record" component={RecordPage} />
           </div>
         </BrowserRouter>
       </Provider>
