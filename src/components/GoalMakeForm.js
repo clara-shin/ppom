@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Form, TextArea, Button, Message } from 'semantic-ui-react';
+import { Form, TextArea, Button, Message, Input } from 'semantic-ui-react';
 import styled from 'styled-components';
-import FormInput, { FormLabel } from './FormInput';
+import { FormLabel } from './FormInput';
 
 const Wrapper = styled.div`
 
@@ -113,7 +113,6 @@ export default class GoalMakeForm extends Component {
     const {
       goal, ppomtime, breaktime, longbreaktime, longbreakfrqncy, gid,
     } = this.state;
-
     return (
       <Wrapper>
         <GoalFormWrap>
@@ -134,13 +133,15 @@ export default class GoalMakeForm extends Component {
                 />
               </div>
             </Form.Field>
-
-            <FormInput name="ppomtime" type="number" value={ppomtime} onChange={this.handleChange} label="집중시간" />
-
-            <FormInput name="breaktime" type="number" value={breaktime} onChange={this.handleChange} label="쉬는 시간" />
-
             <Form.Field inline required>
-
+              <FormLabel>집중 시간</FormLabel>
+              <Input name="ppomtime" type="number" value={ppomtime} onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field inline required>
+              <FormLabel>쉬는 시간</FormLabel>
+              <Input name="breaktime" type="number" value={breaktime} onChange={this.handleChange} />
+            </Form.Field>
+            <Form.Field inline required>
               <FormLabel>긴 휴식 간격</FormLabel>
               <ButtonWrap>
                 <Button.Group>
@@ -150,8 +151,10 @@ export default class GoalMakeForm extends Component {
                 <PpomSet>{longbreakfrqncy}</PpomSet> 마다
               </ButtonWrap>
             </Form.Field>
-
-            <FormInput name="longbreaktime" type="number" value={longbreaktime} onChange={this.handleChange} label="긴 쉬는 시간" />
+            <Form.Field inline required>
+              <FormLabel>긴 쉬는 시간</FormLabel>
+              <Input name="longbreaktime" type="number" value={longbreaktime} onChange={this.handleChange} />
+            </Form.Field>
             {
               errorMsg && (
                 <Message negative>
@@ -163,8 +166,11 @@ export default class GoalMakeForm extends Component {
         </GoalFormWrap>
 
         <ButtonGroup>
-          <DeleteButton type="submit" size="big" className="btn-delete" onClick={this.handleDeleteClick}>삭제</DeleteButton>
-          <SaveButton type="submit" size="big" className="btn-submit active" onClick={this.handleSaveClick}>저장</SaveButton>
+          {
+            gid && (
+              <DeleteButton type="submit" onClick={this.handleDeleteClick} size="big" className="btn-delete">삭제</DeleteButton>
+            )}
+          <SaveButton type="submit" onClick={this.handleSaveClick} fluid size="big" className="btn-submit active">저장</SaveButton>
         </ButtonGroup>
       </Wrapper>
     );
