@@ -54,6 +54,7 @@ export default class GoalMakeForm extends Component {
     errorMsg: '',
     onChange: () => {},
     onSubmit: () => {},
+    onDelete: () => {},
     goalDetail: {},
   }
 
@@ -99,14 +100,18 @@ export default class GoalMakeForm extends Component {
     this.props.onChange(this.state);
   }
 
-  handleSubmit = () => {
+  handleDeleteClick = () => {
+    this.props.onDelete(this.state);
+  }
+
+  handleSaveClick = () => {
     this.props.onSubmit(this.state);
   }
 
   render() {
     const { errorMsg, creating } = this.props;
     const {
-      goal, ppomtime, breaktime, longbreaktime, longbreakfrqncy,
+      goal, ppomtime, breaktime, longbreaktime, longbreakfrqncy, gid,
     } = this.state;
 
     return (
@@ -123,6 +128,8 @@ export default class GoalMakeForm extends Component {
                   placeholder="목표가 무엇인가요?"
                   rows={2}
                   onChange={this.handleChange}
+                  value={goal}
+                  disabled={(gid)}
                   required
                 />
               </div>
@@ -156,12 +163,8 @@ export default class GoalMakeForm extends Component {
         </GoalFormWrap>
 
         <ButtonGroup>
-
-          <SaveButton type="submit" onClick={this.handleSubmit} fluid size="big" className="btn-submit active">저장</SaveButton>
-
-          {/* <DeleteButton type="submit" size="big" className="btn-delete">삭제</DeleteButton>
-          <SaveButton type="submit" onClick={this.handleSubmit} size="big" className="btn-submit active">저장</SaveButton> */}
-
+          <DeleteButton type="submit" size="big" className="btn-delete" onClick={this.handleDeleteClick}>삭제</DeleteButton>
+          <SaveButton type="submit" size="big" className="btn-submit active" onClick={this.handleSaveClick}>저장</SaveButton>
         </ButtonGroup>
       </Wrapper>
     );

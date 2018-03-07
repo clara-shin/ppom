@@ -17,10 +17,9 @@ class GoalPage extends Component {
     const leftFunc = () => {
       this.props.history.goBack();
     };
-    // const goBack = this.props.history.goBack();
     return (
       <Wrapper>
-        <Header title={title} leftLabel="뒤로" leftFunc={leftFunc} />
+        <Header title={title} leftLabel="뒤로" leftFunc={leftFunc} />)
         <GoalMakeFormContainer {...this.props} />
       </Wrapper>
     );
