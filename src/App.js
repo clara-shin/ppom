@@ -11,6 +11,8 @@ import GoalPage from './containers/GoalPage';
 import TimerPage from './containers/TimerPage';
 import RecordPage from './containers/RecordPage';
 import Landing from './components/Landing';
+import GuidePage from './containers/GuidePage';
+
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 const Home = withAuth(() => <Redirect to="/list" />);
@@ -29,6 +31,7 @@ class App extends Component {
             <Route path="/timer/:gid" component={TimerPage} />
             <Route path="/record" component={RecordPage} />
             <Route path="/landing" component={Landing} />
+            <Route path="/guide" component={GuidePage} />
           </div>
         </BrowserRouter>
       </Provider>

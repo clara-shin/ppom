@@ -268,9 +268,38 @@ a.btn--animated {
   animation-fill-mode: backwards;
 }
 
+/* 가이드페이지 */
 
-
-
+.slick-slider > div {
+  height:90vh;
+}
+.slick-slide {
+  height: 90vh;
+}
+.slick-dots{
+  top: 25px;
+  bottom:initial;
+}
+.slider-btn-group {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.slider-btn-group button {
+  width:100%;
+  height:100%;
+  border: 0 none;
+  outline: 0;
+  cursor: pointer;
+  color: #f03e3e;
+  background-color: transparent;
+  font-size: 1.25em;
+}
+.slider-btn-group button.prev {
+  background-color:#f2f2f2;
+  color: #555;
+}
 @keyframes spreadUp {
   0% {
     transform: translateY(10px);
