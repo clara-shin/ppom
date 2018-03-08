@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import thunk from 'redux-thunk';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import LoginPage from './containers/LoginPage';
-import withAuth from './hocs/withAuth';
 import rootReducer from './ducks';
 import ListPage from './containers/ListPage';
 import GoalPage from './containers/GoalPage';
 import TimerPage from './containers/TimerPage';
 import RecordPage from './containers/RecordPage';
 import LandingPage from './containers/LandingPage';
-import Landing from './components/Landing';
+import GuidePage from './containers/GuidePage';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
-const Home = withAuth(() => <Redirect to="/list" />);
 
 class App extends Component {
   render() {
@@ -29,7 +27,7 @@ class App extends Component {
             <Route path="/edit-goal/:gid" component={GoalPage} />
             <Route path="/timer/:gid" component={TimerPage} />
             <Route path="/record" component={RecordPage} />
-            <Route path="/landing" component={Landing} />
+            <Route path="/guide/:type" component={GuidePage} />
           </div>
         </BrowserRouter>
       </Provider>

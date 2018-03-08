@@ -54,7 +54,7 @@ export default class Landing extends Component {
           </HeaderText>
 
           <LinkWrap>
-            <HeaderLink className="btn btn--white btn--animated" to="/login">시작하기</HeaderLink>
+            <HeaderLink className="btn btn--white btn--animated" to="/guide/intro">시작하기</HeaderLink>
           </LinkWrap>
 
         </LandingHeader>
