@@ -170,7 +170,7 @@ export default class GoalMakeForm extends Component {
             gid && (
               <DeleteButton type="submit" onClick={this.handleDeleteClick} size="big" className="btn-delete">삭제</DeleteButton>
             )}
-          <SaveButton type="submit" onClick={this.handleSaveClick} fluid size="big" className="btn-submit active">저장</SaveButton>
+          <SaveButton type="submit" onClick={this.handleSaveClick} fluid={!(gid)} size="big" className="btn-submit active">저장</SaveButton>
         </ButtonGroup>
       </Wrapper>
     );
