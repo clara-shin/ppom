@@ -49,7 +49,7 @@ const getTodayDate = () => {
 };
 
 function getPomo(goalsObj, gid) {
-  if (gid in goalsObj) {
+  if (goalsObj && gid in goalsObj) {
     const dateKey = getTodayDate().date;
     const pomo = 'pomo';
     const goalObj = goalsObj[gid];
@@ -74,7 +74,7 @@ export const fetchGoalList = () => async (dispatch) => {
   const snapArr = await Promise.all([goalsSnap, achieveSnap]);
   const goalObj = snapArr[0].val();
   const achieveObj = snapArr[1].val();
-  if (goalObj && achieveObj) {
+  if (goalObj) {
     const goals = Object.entries(goalObj).map(([gid, goal]) => (
       {
         ...goal,

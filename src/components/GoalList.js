@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Segment } from 'semantic-ui-react';
+import { Segment, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import deactiveImg from './Timer/img/tomato_deactive_70x76.png';
 
 const GoalListWrap = styled.div`
   padding:20px;
@@ -75,7 +76,7 @@ export default class GoalList extends Component {
     const linkTo = (isEditList) ? '/edit-goal/' : '/timer/';
     return (
       <GoalListWrap>{
-        goals.map(({ gid, ...goal }) => (
+        goals.length > 0 && goals.map(({ gid, ...goal }) => (
           <Segment key={gid} stacked>
             {
               <GoalWrap className={goalWrapClassName} to={`${linkTo}${gid}`}>
@@ -87,6 +88,10 @@ export default class GoalList extends Component {
             }
           </Segment>
         ))
+      }{
+        goals.length === 0 && (
+          <Image src={deactiveImg} size="tiny" centered />
+        )
       }
       </GoalListWrap>
     );

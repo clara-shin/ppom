@@ -111,16 +111,18 @@ const getDayAchieves = async (date) => {
   const { currentUser } = firebase.auth();
   const snapshot = await firebase.database().ref(`achieves/${currentUser.uid}`).once('value');
   const achieveObj = snapshot.val();
-  const allAchievesArr = Object.values(achieveObj);
   let details = [];
   if (achieveObj) {
-    const achieves = allAchievesArr.filter(achieve => achieve[date]);
-    details = achieves.map((achieve) => {
-      const newAchieve = achieve[date];
-      newAchieve.quote = getQuote(newAchieve.pomo);
-      return newAchieve;
-    });
-    details.sort((a, b) => b.pomo - a.pomo);
+    const allAchievesArr = Object.values(achieveObj);
+    if (achieveObj) {
+      const achieves = allAchievesArr.filter(achieve => achieve[date]);
+      details = achieves.map((achieve) => {
+        const newAchieve = achieve[date];
+        newAchieve.quote = getQuote(newAchieve.pomo);
+        return newAchieve;
+      });
+      details.sort((a, b) => b.pomo - a.pomo);
+    }
   }
   return details;
 };
@@ -129,49 +131,52 @@ const getWeekAchieves = async (weekArr, startOfWeek, endOfWeek) => {
   const { currentUser } = firebase.auth();
   const snapshot = await firebase.database().ref(`achieves/${currentUser.uid}`).once('value');
   const achieveObj = snapshot.val();
-  const allAchievesArr = Object.values(achieveObj);
-  const keys = [];
   const achieves = {};
-  allAchievesArr.reduce((prev, curr) => {
-    const cur = Object.entries(curr).filter(([date]) => (
-      moment(date).isBetween(startOfWeek, endOfWeek, null, '[]')
-    ));
-    const newPrev = cur.map(([achieveDate, dataObj]) => (
-      prev.reduce((pre, acc) => {
-        if (acc.name === achieveDate) {
-          keys.push(dataObj.goal);
-          acc[dataObj.goal] = dataObj.pomo;
-          if (dataObj.goal in achieves) {
-            const achieveItem = achieves[dataObj.goal];
-            achieveItem.time += dataObj.time;
-            achieveItem.pomo += dataObj.pomo;
-          } else {
-            achieves[dataObj.goal] = {
-              time: dataObj.time,
-              pomo: dataObj.pomo,
-            };
+  if (achieveObj) {
+    const allAchievesArr = Object.values(achieveObj);
+    const keys = [];
+    allAchievesArr.reduce((prev, curr) => {
+      const cur = Object.entries(curr).filter(([date]) => (
+        moment(date).isBetween(startOfWeek, endOfWeek, null, '[]')
+      ));
+      const newPrev = cur.map(([achieveDate, dataObj]) => (
+        prev.reduce((pre, acc) => {
+          if (acc.name === achieveDate) {
+            keys.push(dataObj.goal);
+            acc[dataObj.goal] = dataObj.pomo;
+            if (dataObj.goal in achieves) {
+              const achieveItem = achieves[dataObj.goal];
+              achieveItem.time += dataObj.time;
+              achieveItem.pomo += dataObj.pomo;
+            } else {
+              achieves[dataObj.goal] = {
+                time: dataObj.time,
+                pomo: dataObj.pomo,
+              };
+            }
+            pre.push(acc);
           }
-          pre.push(acc);
-        }
-        return pre;
-      }, [])
-    ));
-    if (newPrev.length) {
-      return [...prev, ...newPrev];
-    }
-    return [...prev];
-  }, weekArr);
-  const uniqueKeys = [...new Set(keys)];
-  weekArr.forEach((item) => {
-    const curItem = item;
-    curItem.name = moment(item.name).format('ddd');
-    uniqueKeys.forEach((goal) => {
-      if (!(goal in curItem)) {
-        curItem[goal] = 0;
+          return pre;
+        }, [])
+      ));
+      if (newPrev.length) {
+        return [...prev, ...newPrev];
       }
+      return [...prev];
+    }, weekArr);
+    const uniqueKeys = [...new Set(keys)];
+    weekArr.forEach((item) => {
+      const curItem = item;
+      curItem.name = moment(item.name).format('ddd');
+      uniqueKeys.forEach((goal) => {
+        if (!(goal in curItem)) {
+          curItem[goal] = 0;
+        }
+      });
     });
-  });
-  return { data: weekArr, keys: uniqueKeys, achieves };
+    return { data: weekArr, keys: uniqueKeys, achieves };
+  }
+  return { data: [], keys: [], achieves };
 };
 
 export const fetchRecordInit = (date = mm.format(DATE_FORMAT)) => async (dispatch) => {

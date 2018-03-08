@@ -197,7 +197,6 @@ export default class Record extends Component {
 
   getTheme = (idx) => {
     const color = this.getColor(idx);
-    console.log(color);
     return {
       color,
     };
@@ -271,7 +270,7 @@ export default class Record extends Component {
           (activeItem === 'week') && (
             <div>
               {dataArr.length === 0 && (
-                <Image src={deactiveImg} size="tiny" circular centered />
+                <Image src={deactiveImg} size="mini" circular centered />
               )}
               {dataArr.length > 0 && (
                 <ChartWrap>
