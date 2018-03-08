@@ -276,6 +276,9 @@ a.btn--animated {
 .slick-slide {
   height: 90vh;
 }
+.slick-slide > div {
+  padding-top:75px;
+}
 .slick-dots{
   top: 25px;
   bottom:initial;
@@ -299,6 +302,29 @@ a.btn--animated {
 .slider-btn-group button.prev {
   background-color:#f2f2f2;
   color: #555;
+}
+
+.slideImg{
+  bottom: 10px;
+  width: 58vw !important;
+  margin-top: 35px;
+  z-index: 10;
+  box-shadow: 1px 1px 2px #848484;
+}
+.slideImg.miniImg {
+  width: 45vw !important;
+  margin-right: -38px !important;
+  transform: rotateX(12deg) rotateY(30deg);
+  margin-left: -34px !important;
+  margin-top: 80px;
+}
+.slideImg.smallimg {
+  width: 52vw !important;
+  margin-right: -31px !important;
+  margin-left: -25px !important;
+}
+.slideImg.smallimg:last-child{
+  margin-top:70px;
 }
 @keyframes spreadUp {
   0% {
