@@ -170,8 +170,6 @@ const ChartWrap = styled.div`
   }
 `;
 
-
-let dayIdx = 0;
 const colors = ['#4a7ac0', '#f1484b', '#178c3d', '#e95b9b', '#f27a29', '#ab8e69', '#b4d34f', '#aaaaaa', '#2095e7', '#fdcc4c', '#53b29d', '#000000'];
 export default class Record extends Component {
   static defaultProps = {
@@ -202,8 +200,7 @@ export default class Record extends Component {
     this.props.handleItemClick(name);
   }
 
-  handleDateClick = (e, { name }) => {
-    dayIdx = (name === 'next') ? 1 : -1;
+  handleDateClick = (dayIdx) => {
     this.props.handleDateClick(dayIdx);
   }
 
@@ -228,11 +225,11 @@ export default class Record extends Component {
         </TabMenu>
 
         <DateRangeWrap>
-          <DateRangeButton className="icon-left-open" onClick={this.handleDateClick} />
+          <DateRangeButton name="prev" className="icon-left-open" onClick={() => this.handleDateClick(-1)} />
           <DateRange>
             <span>{dateInfo}</span>
           </DateRange>
-          <DateRangeButton className="icon-right-open" onClick={this.handleDateClick} />
+          <DateRangeButton name="next" className="icon-right-open" onClick={() => this.handleDateClick(1)} />
         </DateRangeWrap>
 
         {
