@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Image, Segment } from 'semantic-ui-react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import deactiveImg from './Timer/img/tomato_deactive_70x76.png';
 
@@ -130,12 +130,17 @@ const WeekRecordWrap = styled.div`
   height:100%;
   position:relative;
   box-sizing: border-box;
-  color:#181818;
+  color: #181818;
   padding:10px;
-  border:1px solid #ced3d6;
-  border-left: 5px solid #ced3d6;
   margin: 10px 0;
+  border: 2px solid #ced3d6;
+  border-left: 7px solid ${props => props.theme.color};
 `;
+WeekRecordWrap.defaultProps = {
+  theme: {
+    color: '#ced3d6',
+  },
+};
 const GoalTitleForWeek = styled.div`
   width:60%;
   white-space: nowrap;
@@ -147,6 +152,7 @@ const GoalTitleForWeek = styled.div`
 `;
 const WeeklyPpomCount = styled.div`
   width:25%;
+  text-align: right;
 `;
 
 const WeeklyPpomNum = styled.strong`
@@ -157,7 +163,8 @@ const WeeklyPpomNum = styled.strong`
   padding-right: 3px;
 `;
 const TotalTime = styled.span`
-  width: auto;
+  width: 15%;
+  text-align: center;
 `;
 
 // 리차트
@@ -188,12 +195,20 @@ export default class Record extends Component {
     return colors[idx];
   }
 
+  getTheme = (idx) => {
+    const color = this.getColor(idx);
+    console.log(color);
+    return {
+      color,
+    };
+  }
+
   getFormattedTime = (minute) => {
     if (minute > 60) {
       const hour = parseInt(minute / 60, 10);
-      return `${hour} 시간 ${minute - (hour * 60)} 분`;
+      return `${hour}h ${minute - (hour * 60)}m`;
     }
-    return `${minute} 분`;
+    return `${minute}m`;
   }
 
   handleItemClick = (e, { name }) => {
@@ -260,10 +275,10 @@ export default class Record extends Component {
               )}
               {dataArr.length > 0 && (
                 <ChartWrap>
-                  <ResponsiveContainer width="100%" aspect={1.0 / 0.25}>
+                  <ResponsiveContainer width="100%" aspect={1.0 / 0.45}>
                     <LineChart
                       width={400}
-                      height={100}
+                      height={180}
                       data={dataArr}
                     >
                       <CartesianGrid strokeDasharray="3 3" />
@@ -279,14 +294,16 @@ export default class Record extends Component {
                   </ResponsiveContainer>
                 </ChartWrap>
               )}{
-                Object.entries(achieves).map(([goal, record]) => (
-                  <WeekRecordWrap>
-                    <GoalTitleForWeek>{goal}</GoalTitleForWeek>
-                    <WeeklyPpomCount>
-                      <WeeklyPpomNum>{record.pomo}</WeeklyPpomNum> ppom
-                    </WeeklyPpomCount>
-                    <TotalTime>{this.getFormattedTime(record.time)}</TotalTime>
-                  </WeekRecordWrap>
+                Object.entries(achieves).map(([goal, record], idx) => (
+                  <ThemeProvider theme={this.getTheme(idx)}>
+                    <WeekRecordWrap>
+                      <GoalTitleForWeek>{goal}</GoalTitleForWeek>
+                      <WeeklyPpomCount>
+                        <WeeklyPpomNum>{record.pomo}</WeeklyPpomNum> ppom
+                      </WeeklyPpomCount>
+                      <TotalTime>{this.getFormattedTime(record.time)}</TotalTime>
+                    </WeekRecordWrap>
+                  </ThemeProvider>
                 ))
               }
             </div>
