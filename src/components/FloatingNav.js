@@ -5,6 +5,7 @@ import {
   Dimmer,
   Icon,
 } from 'semantic-ui-react';
+import { Redirect } from 'react-router-dom';
 
 const CustomButton = styled.button`
   display: inline-block;
@@ -84,12 +85,15 @@ export default class FloatingNav extends Component {
   }
 
   handleClickLogout = () => {
-    this.props.onClickLogout();
-    this.handleNavToggle();
+    if (this.state.active) {
+      this.props.onClickLogout();
+      this.handleNavToggle();
+    }
   }
 
   render() {
     const { active } = this.state;
+
     return (
       <div>
         <Navigation>

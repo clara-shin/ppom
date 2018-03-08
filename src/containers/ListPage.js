@@ -14,7 +14,6 @@ const Wrapper = styled.div`
 class ListPage extends Component {
   state = {
     isEditList: false,
-    isLogout: false,
   }
 
   onEditGoals = (isEdit) => {
@@ -25,13 +24,11 @@ class ListPage extends Component {
 
   onClickLogout = async () => {
     await firebase.auth().signOut();
-    this.setState({
-      isLogout: true,
-    });
+    this.props.history.push('/login');
   }
 
   render() {
-    const { isEditList, isLogout } = this.state;
+    const { isEditList } = this.state;
     const leftFunc = () => {
       this.props.history.push('/make-goal');
     };
@@ -42,11 +39,6 @@ class ListPage extends Component {
       this.props.history.goBack();
     };
 
-    if (isLogout) {
-      return (
-        <Redirect to="/login" />
-      );
-    }
     return (
       <Wrapper>
         {

@@ -9,19 +9,24 @@ export default class LoginScreenContainer extends Component {
     loading: false,
   }
 
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({
+          redirectToList: true,
+        });
+      }
+    });
+  }
+
   completeGoogleLogin = async () => {
     this.setState({
       loading: true,
     });
-    const redirectResult = await firebase.auth().getRedirectResult();
+    await firebase.auth().getRedirectResult();
     this.setState({
       loading: false,
     });
-    if (redirectResult.credential) {
-      this.setState({
-        redirectToList: true,
-      });
-    }
   }
 
   handleGoogleLogin = async () => {
