@@ -148,10 +148,9 @@ const GoalTitleForWeek = styled.div`
   text-overflow: ellipsis;
   font-size: 1.2em;
   line-height:1.5;
-  margin-right:10px;
 `;
 const WeeklyPpomCount = styled.div`
-  width:20%;
+  width:22%;
   text-align: right;
 `;
 
