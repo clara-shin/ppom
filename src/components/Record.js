@@ -142,7 +142,7 @@ WeekRecordWrap.defaultProps = {
   },
 };
 const GoalTitleForWeek = styled.div`
-  width:60%;
+  width:50%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -151,7 +151,7 @@ const GoalTitleForWeek = styled.div`
   margin-right:10px;
 `;
 const WeeklyPpomCount = styled.div`
-  width:25%;
+  width:20%;
   text-align: right;
 `;
 
@@ -163,8 +163,8 @@ const WeeklyPpomNum = styled.strong`
   padding-right: 3px;
 `;
 const TotalTime = styled.span`
-  width: 15%;
-  text-align: center;
+  width: 23%;
+  text-align: right;
 `;
 
 // 리차트
