@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Image } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import LogoImg from './Landing/img/tomato_on.png';
 
 const Wrap = styled.div`
@@ -32,12 +33,8 @@ const HeaderText = styled.div`
   transform: translate(-50%, -50%);
   text-align: center;
 `;
-const Button = styled.button`
-  display: inline-block;
-`;
-const Link = Button.withComponent('a');
-
 const HeaderLink = styled(Link)`
+  display: inline-block;
   font-size:1.2em !important;
 `;
 
@@ -57,7 +54,7 @@ export default class Landing extends Component {
           </HeaderText>
 
           <LinkWrap>
-            <HeaderLink className="btn btn--white btn--animated">시작하기</HeaderLink>
+            <HeaderLink className="btn btn--white btn--animated" to="/login">시작하기</HeaderLink>
           </LinkWrap>
 
         </LandingHeader>

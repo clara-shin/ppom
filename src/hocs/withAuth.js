@@ -35,7 +35,7 @@ export default function withAuth(WrappedComponent) {
       const { redirectToLogin, loading } = this.state;
       if (redirectToLogin) {
         return (
-          <Redirect to="/login" />
+          <Redirect to="/landing" />
         );
       } else if (loading) {
         return (
