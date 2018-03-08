@@ -60,6 +60,9 @@ const SetTimer = styled.p`
   padding: 0px 20px;
 `;
 const CurrStampWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   text-align: center;
   padding: 20px;
@@ -84,9 +87,6 @@ const stampLabelStyle = {
   fontSize: '2rem',
   fontWight: 'normal',
   color: '#fff',
-  position: 'absolute',
-  marginTop: '20px',
-  marginLeft: '10px',
 };
 
 function formatTime(time) {
@@ -158,7 +158,7 @@ export default class Timer extends Component {
                   {(ppomTimes < 5) && (
                     <img src={stampOff} alt="현재뽐" style={stampStyle} />)}
                   {(ppomTimes > 5) && (
-                    <span style={stampLabelStyle}>x {ppomTimes}</span>
+                    <span style={stampLabelStyle}> x {ppomTimes}</span>
                   )}
                 </CurrStampWrap>
                 <TimerButtonWrap>
