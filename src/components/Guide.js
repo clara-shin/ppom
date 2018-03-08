@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Image } from 'semantic-ui-react';
+import GoalListImg from './Guide/img/ppom-list.png';
+import DayRecordImg from './Guide/img/daily-record.png';
+import WeekRecordImg from './Guide/img/weekly-record.png';
+import GoalFormImg from './Guide/img/goal-make-form.png';
+import PpomStep1Img from './Guide/img/ppom-step-1.png';
+import PpomStep2Img from './Guide/img/ppom-step-2.png';
+import PpomStep3Img from './Guide/img/ppom-step-3.png';
 import Slider from '../slider';
 
 
@@ -12,11 +20,19 @@ const GuideWrap = styled.div`
 const GuideBoxWrap = styled.div`
   width:100%;
   height:100%;
-  background-color:gold;
+  background-color:#ced3d6;
   display:flex;
   flex-direction:column;
-  justify-content:center;
+  justify-content:flex-start;
   align-items: center;
+  overflow:hidden;
+`;
+
+const ImageWrap = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  letter-spacing: -2px;
 `;
 
 export default class Guide extends Component {
@@ -74,6 +90,7 @@ export default class Guide extends Component {
                 <li>집중하는 습관,</li>
                 <li>뽀모도로 기법입니다.</li>
               </ul>
+              <Image src={GoalFormImg} alt="뽐 리스트 이미지" size="medium" centered className="slideImg" />
             </GuideBoxWrap>
           </div>
           <div key={2}>
@@ -84,9 +101,11 @@ export default class Guide extends Component {
                 <li>목표는 단순하게</li>
                 <li>실천은 분명하게</li>
               </ul>
-              <p>
-                <img />
-              </p>
+              <ImageWrap>
+                <Image src={PpomStep1Img} alt="뽐 리스트 이미지" size="medium" centered className="slideImg miniImg" />
+                <Image src={PpomStep2Img} alt="뽐 리스트 이미지" size="medium" centered className="slideImg miniImg" />
+                <Image src={PpomStep3Img} alt="뽐 리스트 이미지" size="medium" centered className="slideImg miniImg" />
+              </ImageWrap>
             </GuideBoxWrap>
           </div>
           <div key={3}>
@@ -97,12 +116,17 @@ export default class Guide extends Component {
                 <li>시간관리 매니저</li>
                 <li>PPOM TIMER</li>
               </ul>
+              <ImageWrap>
+                <Image src={DayRecordImg} alt="뽐 리스트 이미지" size="medium" centered className="slideImg smallimg" />
+                <Image src={WeekRecordImg} alt="뽐 리스트 이미지" size="medium" centered className="slideImg smallimg" />
+              </ImageWrap>
             </GuideBoxWrap>
           </div>
           <div key={4}>
             <GuideBoxWrap>
               <h3>어제보다 나은 오늘,</h3>
               <p>뽐과 함께 만들어가요.</p>
+              <Image src={GoalListImg} alt="뽐 리스트 이미지" size="medium" centered className="slideImg" />
             </GuideBoxWrap>
           </div>
         </Slider>
