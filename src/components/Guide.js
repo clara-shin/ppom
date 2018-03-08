@@ -64,10 +64,12 @@ export default class Guide extends Component {
       this.slider.slickNext();
     }
   }
+
   previous() {
     this.setPage(-1);
     this.slider.slickPrev();
   }
+
   render() {
     const settings = {
       accessibility: true,
@@ -78,6 +80,7 @@ export default class Guide extends Component {
       slidesToScroll: 1,
       swipe: true,
     };
+
     return (
       <GuideWrap>
         <Slider ref={c => this.slider = c} {...settings}>
