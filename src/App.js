@@ -10,6 +10,7 @@ import ListPage from './containers/ListPage';
 import GoalPage from './containers/GoalPage';
 import TimerPage from './containers/TimerPage';
 import RecordPage from './containers/RecordPage';
+import LandingPage from './containers/LandingPage';
 import Landing from './components/Landing';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
@@ -21,7 +22,7 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <div>
-            <Route path="/" exact component={Home} />
+            <Route path="/" exact component={LandingPage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/list" component={ListPage} />
             <Route path="/make-goal" component={GoalPage} />

@@ -3,7 +3,7 @@ import * as firebase from 'firebase';
 import { Redirect } from 'react-router-dom';
 import { Dimmer, Loader } from 'semantic-ui-react';
 
-export default function withAuth(WrappedComponent) {
+export default function withAuth(AuthWrappedComponent, NotAuthWrappedCompoent) {
   return class extends Component {
     state = {
       currentUser: null,
@@ -33,9 +33,13 @@ export default function withAuth(WrappedComponent) {
 
     render() {
       const { redirectToLogin, loading } = this.state;
-      if (redirectToLogin) {
+      if (redirectToLogin && !NotAuthWrappedCompoent) {
         return (
-          <Redirect to="/landing" />
+          <Redirect to="/login" />
+        );
+      } else if (redirectToLogin && NotAuthWrappedCompoent) {
+        return (
+          <NotAuthWrappedCompoent {...this.props} />
         );
       } else if (loading) {
         return (
@@ -45,7 +49,7 @@ export default function withAuth(WrappedComponent) {
         );
       }
       return (
-        <WrappedComponent {...this.props} />
+        <AuthWrappedComponent {...this.props} />
       );
     }
   };
